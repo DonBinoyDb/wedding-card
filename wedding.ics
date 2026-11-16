@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sanjo & Dhiya Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:wedding-sanjo-dhiya-20270110@weddingcard
+DTSTAMP:20261116T110000Z
+DTSTART:20270110T093000Z
+DTEND:20270110T173000Z
+SUMMARY:Sanjo & Dhiya Wedding
+DESCRIPTION:Together with our families, we would be delighted to have you join us as we celebrate the beginning of our forever.\n\nWedding Ceremony: 3:00 PM at St. Joseph Church, Mankavu\nReception: 6:00 PM at Capkon City, Pantheerankavu
+LOCATION:St. Joseph Church, Mankavu & Capkon City, Pantheerankavu, Kozhikode
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
+
