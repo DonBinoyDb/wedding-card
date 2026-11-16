@@ -400,7 +400,7 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
     </div>
   </section>
 
-  <!-- 4 · Вечер -->
+  <!-- 4 · The Day Section (Temporarily commented out: uncomment to restore)
   <section class="sec s-pearl" data-block="plan" data-block-name="4 · Программа вечера">
     <span class="lace lace--top" aria-hidden="true"></span>
     <div class="wrap">
@@ -416,6 +416,7 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
     </div>
     <span class="lace lace--bot" aria-hidden="true"></span>
   </section>
+  -->
 
   <!-- 5 · Место -->
   <section class="sec s-night" data-block="venue" data-block-name="5 · Место">
@@ -801,12 +802,15 @@ var EVENT={
   }
 
   /* ===== 4 · вечер: нить прорисовывается по прокрутке ===== */
-  var eve=document.getElementById('eve'), lis=[].slice.call(eve.querySelectorAll('li')), plSm=0, plT=0, plRaf=0;
-  function eveDraw(){ plSm+=(plT-plSm)*.1; if(Math.abs(plT-plSm)<.001)plSm=plT; eve.style.setProperty('--pl',plSm.toFixed(4));
-    lis.forEach(function(li,k){ li.classList.toggle('is-lit',plSm>=(k+.2)/lis.length-.05); });
-    plRaf=plSm!==plT?requestAnimationFrame(eveDraw):0; }
-  function eveTick(){ if(still)plT=1; else{ var r=eve.getBoundingClientRect(); plT=clamp((innerHeight*.65-r.top)/r.height); } if(!plRaf)plRaf=requestAnimationFrame(eveDraw); }
-  addEventListener('scroll',eveTick,{passive:true}); eveTick();
+  var eve=document.getElementById('eve');
+  if(eve){
+    var lis=[].slice.call(eve.querySelectorAll('li')), plSm=0, plT=0, plRaf=0;
+    function eveDraw(){ plSm+=(plT-plSm)*.1; if(Math.abs(plT-plSm)<.001)plSm=plT; eve.style.setProperty('--pl',plSm.toFixed(4));
+      lis.forEach(function(li,k){ li.classList.toggle('is-lit',plSm>=(k+.2)/lis.length-.05); });
+      plRaf=plSm!==plT?requestAnimationFrame(eveDraw):0; }
+    function eveTick(){ if(still)plT=1; else{ var r=eve.getBoundingClientRect(); plT=clamp((innerHeight*.65-r.top)/r.height); } if(!plRaf)plRaf=requestAnimationFrame(eveDraw); }
+    addEventListener('scroll',eveTick,{passive:true}); eveTick();
+  }
 
   /* ===== 6 · дресс-код: нажатие на цвет ===== */
   var swName=document.getElementById('swName'), swBase=swName.textContent;
