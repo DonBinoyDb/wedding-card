@@ -62,17 +62,9 @@ p{margin:0}
 .intro__top{top:calc(9svh + env(safe-area-inset-top))}
 .intro__for{font:italic 400 21px/1.3 var(--serif);text-shadow:0 2px 14px rgba(20,0,4,.9)}
 .intro__mono{display:block;margin:14px auto 0;font:400 13px/1 var(--disp);letter-spacing:.5em;padding-left:.5em;color:var(--gold2)}
-.intro__hint{bottom:calc(92px + env(safe-area-inset-bottom))}
+.intro__hint{bottom:calc(64px + env(safe-area-inset-bottom))}
 .intro__blow{font:400 clamp(54px,15.5vw,92px)/.86 var(--script);color:#fff7ef;text-shadow:0 0 18px rgba(255,190,160,.5),0 4px 30px rgba(30,0,6,.9)}
 .intro__or{margin-top:12px;font:italic 400 18px/1.4 var(--serif);text-shadow:0 2px 12px rgba(20,0,4,.95);opacity:.92}
-.meter{width:min(160px,42vw);height:2px;margin:16px auto 0;border-radius:2px;background:rgba(255,240,230,.2);overflow:hidden;opacity:0;transition:opacity .4s}
-.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#fff3dc);transform-origin:0 50%;transform:scaleX(var(--blow,0))}
-.intro.is-mic .meter{opacity:1}
-.mic{position:absolute;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));transform:translateX(-50%);display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 18px;border-radius:999px;white-space:nowrap;
-  border:1px solid rgba(243,220,174,.55);background:rgba(26,2,7,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff4ea;font:500 13px/1 var(--sans);letter-spacing:.03em;cursor:pointer;transition:opacity .5s}
-.mic svg{width:16px;height:16px;flex:none}
-.mic[hidden]{display:none}
-.intro.is-mic .mic,.intro.is-go .mic{opacity:0;pointer-events:none}
 .intro.is-go .intro__top,.intro.is-go .intro__hint{opacity:0;pointer-events:none}
 .intro.is-go .intro__top{transform:translateY(-16px)}
 .intro.is-go .intro__hint{transform:translateY(16px)}
@@ -302,10 +294,6 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
 .love .s{margin-top:4px;font:400 66px/.9 var(--script);opacity:1;font-style:normal}
 .love .s em{display:block;margin:4px 0;font:italic 500 .45em/1 var(--serif);color:var(--gold2)}
 
-.made{display:block;text-align:center;font:400 12px/1.6 var(--sans);letter-spacing:.06em;color:rgba(247,238,230,.6);padding:24px var(--pad) calc(96px + env(safe-area-inset-bottom));background:var(--night)}
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px var(--pad) calc(12px + env(safe-area-inset-bottom));transform:translateY(130%);transition:transform .45s var(--ease);display:flex;justify-content:center;pointer-events:none}
-.dock.is-on{transform:none}
-.dock .btn{width:100%;max-width:400px;pointer-events:auto}
 
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1!important;transform:none!important;clip-path:none!important}
@@ -315,8 +303,8 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
 </head>
 <body>
 
-<!-- 0 · Заставка: стена из блесток. Гость дует в телефон (или нажимает), блестки осыпаются, открывается занавес, пара танцует -->
-<header class="intro" id="intro" role="button" tabindex="0" aria-label="A wall of red glitter. Blow on your phone or tap to open the invitation from Sanjo and Dhiya" data-block="intro" data-block-name="0 · Заставка: блестки">
+<!-- 0 · Заставка: стена из блесток. Гость нажимает, блестки осыпаются, открывается занавес, пара танцует -->
+<header class="intro" id="intro" role="button" tabindex="0" aria-label="A wall of red glitter. Tap to open the invitation from Sanjo and Dhiya" data-block="intro" data-block-name="0 · Заставка: блестки">
   <img class="intro__blur" src="media/film-ruby-first_v=2.jpg" alt="" aria-hidden="true">
   <div class="intro__box">
     <video class="intro__v" id="film" poster="media/film-ruby-first_v=2.jpg" muted="" playsinline="" webkit-playsinline="" preload="auto" disablepictureinpicture="" aria-label="Red glitter falls away, the velvet curtain opens and Sanjo and Dhiya dance in a beam of light"></video>
@@ -332,14 +320,9 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
     <span class="intro__mono">S &amp; D</span>
   </div>
   <div class="intro__hint">
-    <p class="intro__blow" id="introBlow">Blow on the glitter</p>
-    <p class="intro__or" id="introOr">or simply tap</p>
-    <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+    <p class="intro__blow" id="introBlow">Tap anywhere</p>
+    <p class="intro__or" id="introOr">to open your invitation</p>
   </div>
-  <button class="mic" id="mic" type="button">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
-    <span id="micT">Tap here, then blow</span>
-  </button>
 
   <div class="hero" aria-live="polite">
     <p class="hero__tog" id="heroFor">Together with our families</p>
@@ -482,11 +465,20 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
   <section class="sec s-pearl" data-block="details" data-block-name="7 · Пожелания">
     <span class="lace lace--top" aria-hidden="true"></span>
     <div class="wrap">
-      <h2 class="t rv" style="color:var(--ruby)">A few wishes</h2>
+      <h2 class="t rv" style="color:var(--ruby)">Heartfelt wishes</h2>
       <div class="wish">
-        <article class="wcard rv"><h3>Gifts</h3><p>Your presence is our favourite gift. If you would like to add something, a contribution to our honeymoon in Lake Como will make us very happy.</p></article>
-        <article class="wcard rv"><h3>An evening for grown ups</h3><p>We love your little ones, yet this night is planned for adults only.</p></article>
-        <article class="wcard rv"><h3>Unplugged vows</h3><p>Please keep your phones away during the ceremony. Our photographer will share every picture with you.</p></article>
+        <article class="wcard rv">
+          <h3>Your Presence &amp; Prayers</h3>
+          <p>Your presence, love, and prayers on our special day are the greatest gifts we could ever ask for. Having you with us to celebrate our new beginning means the world to our families.</p>
+        </article>
+        <article class="wcard rv">
+          <h3>A Family Celebration</h3>
+          <p>We warmly invite you and your family to join us in this joyous milestone. Let’s laugh, celebrate, and create cherished memories together.</p>
+        </article>
+        <article class="wcard rv">
+          <h3>In the Moment</h3>
+          <p>We invite you to be fully present with us as we receive our Nuptial Blessing. Feel free to snap and share all your favorite candid smiles and celebrations during the reception!</p>
+        </article>
       </div>
     </div>
     <span class="lace lace--bot" aria-hidden="true"></span>
@@ -572,7 +564,7 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
     </div>
   </section>
 
-  <!-- 9 · Вопросы -->
+  <!-- 9 · Questions Section (Commented out: uncomment to restore)
   <section class="sec s-night" data-block="faq" data-block-name="9 · Вопросы">
     <div class="wrap">
       <h2 class="t rv">Questions</h2>
@@ -584,6 +576,7 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
       </div>
     </div>
   </section>
+  -->
 
   <!-- 10 · До встречи: таймер на фоне сцены с занавесом -->
   <section class="sec closing" data-block="end" data-block-name="10 · До встречи">
@@ -599,9 +592,6 @@ textarea.in{min-height:84px;resize:vertical;border:1px solid rgba(59,7,16,.28);b
   </section>
 
 </main>
-<small class="made">Made with <a href="index.html" id="madeLink">invitations agency</a>. Want one like this?</small>
-
-<div class="dock" id="dock"><a class="btn btn--gold" href="index.html">Reply to the invitation</a></div>
 
 <script>
 /* Данные пары: менеджер меняет только этот объект */
@@ -629,18 +619,16 @@ var EVENT={
   }
 
   /* ===== 0 · заставка ===== */
-  var intro=document.getElementById('intro'), film=document.getElementById('film'), meter=document.getElementById('meter'), cv=document.getElementById('anim');
-  var micBtn=document.getElementById('mic'), micT=document.getElementById('micT'), opened=false, named=false, blow=0, vidReady=false, mode='', autoOK=null;
+  var intro=document.getElementById('intro'), film=document.getElementById('film'), cv=document.getElementById('anim');
+  var opened=false, named=false, vidReady=false, mode='', autoOK=null, autoT=0;
   var VID='media/film-ruby2.mp4';
   film.muted=true; film.defaultMuted=true; film.setAttribute('muted',''); film.src=VID; try{film.load();}catch(e){}
   film.addEventListener('canplaythrough',function(){ if(!vidReady){ vidReady=true; plan(); } });
-  /* прогрев: сразу запускаем и останавливаем видео без звука. Так iPhone скачивает его заранее,
-     а мы узнаём, разрешит ли телефон запуск без касания (в энергосбережении не разрешает) */
+  /* прогрев: сразу запускаем и останавливаем видео без звука */
   try{ var wp=film.play(); if(wp&&wp.then)wp.then(function(){ autoOK=true; if(!opened){ film.pause(); try{film.currentTime=0;}catch(e){} } vidReady=true; plan(); },
     function(e){ if(e&&e.name==='NotAllowedError'){ autoOK=false; prepDecode(); vidReady=true; plan(); } }); }catch(e){}
 
-  /* ===== запасной показ для выдоха без касания: ролик раскодирует видеодекодер телефона,
-     кадры рисуются на canvas в полном качестве. Это не запуск видео, поэтому энергосбережение его не блокирует ===== */
+  /* запасной показ, если телефон блокирует автозапуск: ролик раскодирует декодер */
   var DEC=null;
   function prepDecode(){ if(DEC||!window.VideoDecoder||!window.fetch)return DEC;
     DEC=Promise.all([fetch(VID).then(function(r){ return r.arrayBuffer(); }),fetch('media/film-ruby2.json').then(function(r){ return r.json(); })])
@@ -653,7 +641,7 @@ var EVENT={
     p.then(function(D){ if(named)return;
       var r=cv.getBoundingClientRect(), dpr=Math.min(2,devicePixelRatio||1), W=cv.width=Math.round(r.width*dpr), Hc=cv.height=Math.round(r.height*dpr), g=cv.getContext('2d');
       var sc=Math.max(W/D.m.w,Hc/D.m.h), dw=D.m.w*sc, dh=D.m.h*sc, dx=(W-dw)/2, dy=(Hc-dh)/2;
-      var F=D.m.f, q=[], i=0, t0=0, last=F[F.length-1][2], shown=false, done=false;
+      var F=D.m.f, q=[], i=0, t0=0, last=F[F.length-1][2], done=false;
       var dec=new VideoDecoder({output:function(fr){ q.push(fr); },error:function(){ if(!done){ done=true; stillEnd(); } }});
       dec.configure(D.cfg);
       function feed(){ while(i<F.length&&q.length+dec.decodeQueueSize<12){ var f=F[i++]; dec.decode(new EncodedVideoChunk({type:f[3]?'key':'delta',timestamp:f[2],data:D.buf.subarray(f[0],f[0]+f[1])})); } if(i>=F.length)dec.flush().catch(function(){}); }
@@ -670,16 +658,14 @@ var EVENT={
     setTimeout(function(){ if(!named&&!intro.classList.contains('is-seq'))stillEnd(); },9000);
   }
 
-  function setBlow(v){ blow=v; meter.style.setProperty('--blow',v.toFixed(3)); }
-  /* открыть: касание всегда запускает видео; выдох и автозапуск запускают видео, если телефон разрешает, иначе раскодированный показ */
-  function open(byTap){ if(opened)return; opened=true; clearTimeout(autoT); buzz([20,30,40]); stopMic(); setBlow(0);
+  /* открыть: нажатие или автозапуск */
+  function open(){ if(opened)return; opened=true; clearTimeout(autoT); buzz([20,30,40]);
     intro.classList.add('is-go'); intro.removeAttribute('role'); intro.removeAttribute('tabindex'); intro.setAttribute('aria-label','Sanjo and Dhiya');
-    if(!byTap&&autoOK===false){ playDecoded(); return; }
+    if(autoOK===false){ playDecoded(); return; }
     mode='video'; try{film.currentTime=0;}catch(e){}
-    var fail=function(e){ DBG.play='rejected '+(e&&e.name); if(byTap)stillEnd(); else playDecoded(); };
+    var fail=function(e){ DBG.play='rejected '+(e&&e.name); stillEnd(); };
     try{ var p=film.play(); if(p&&p.then)p.then(function(){ DBG.play='ok'; },fail); }catch(e){ fail(e); }
-    /* видео так и не двинулось: без касания переходим на раскодированный показ, после касания показываем финальный кадр */
-    setTimeout(function(){ if(mode==='video'&&!named&&film.currentTime<.05){ if(byTap)return; try{film.pause();}catch(e){} playDecoded(); } },4000);
+    setTimeout(function(){ if(mode==='video'&&!named&&film.currentTime<.05)playDecoded(); },4000);
     setTimeout(function(){ if(mode==='video'&&!named&&film.currentTime<.3)stillEnd(); },10000);
   }
   function stillEnd(){ if(named)return; try{film.pause();}catch(e){} intro.classList.add('is-still','is-playing'); showNames(); }
@@ -688,66 +674,19 @@ var EVENT={
   film.addEventListener('timeupdate',function(){ if(mode==='video'&&film.currentTime>=EVENT.namesAt)showNames(); });
   film.addEventListener('ended',function(){ if(mode==='video')showNames(); });
   film.addEventListener('error',function(){ if(opened&&mode==='video')playDecoded(); });
-  function tapOpen(e){ if(opened||e.target.closest('.mic'))return; open(true); }
+  function tapOpen(){ if(opened)return; open(); }
   intro.addEventListener('click',tapOpen); intro.addEventListener('touchend',tapOpen);
-  intro.addEventListener('keydown',function(e){ if(!opened&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); open(true); } });
+  intro.addEventListener('keydown',function(e){ if(!opened&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); open(); } });
 
-  /* ===== микрофон: страница сразу просит доступ, одного лёгкого выдоха хватает =====
-     Без микрофона гость нажимает, или через 3 секунды после загрузки видео всё открывается само.
-     Пока браузер показывает окно с вопросом про микрофон, ничего само не открывается. */
-  var AC=window.AudioContext||window.webkitAudioContext, actx=null, an=null, stream=null, buf=null, micOn=false, micWait=false, needTap=false, calib=[], floor=.01, last=0, autoT=0;
-  var canMic=!!(AC&&navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)&&!still;
-  function plan(){ if(opened||micWait||!vidReady)return; clearTimeout(autoT); autoT=setTimeout(function(){ open(false); },micOn?8000:needTap?6000:3000); }
-  function stopMic(){ micOn=false; try{ stream&&stream.getTracks().forEach(function(t){t.stop();}); }catch(e){} try{ actx&&actx.close(); }catch(e){} stream=null; actx=null; }
-  function noMic(){ micWait=false; if(opened)return; micBtn.hidden=true; document.getElementById('introBlow').textContent='Touch the glitter'; document.getElementById('introOr').textContent='and watch it fall away'; plan(); }
-  function begin(){ if(micOn||opened)return; micOn=true; micWait=false; needTap=false; intro.classList.add('is-mic'); document.getElementById('introOr').textContent='one gentle breath is enough'; last=performance.now(); requestAnimationFrame(sense); plan(); }
-  function startMic(){
-    if(!canMic){ noMic(); return; }
-    if(!actx){ try{ actx=new AC(); }catch(e){ noMic(); return; } }
-    if(actx.state!=='running'){ try{ actx.resume(); }catch(e){} }
-    var ready=function(){ if(!actx)return; if(actx.state==='running'){ begin(); return; }
-      actx.resume().then(function(){ if(actx&&actx.state==='running')begin(); },function(){});
-      /* iPhone не даёт слушать без касания: одна кнопка, потом можно дуть */
-      setTimeout(function(){ if(!micOn&&!opened){ micWait=false; needTap=true; micBtn.hidden=false; micT.textContent='Tap here, then blow'; plan(); } },700); };
-    if(stream){ ready(); return; }
-    micWait=true;
-    navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}}).then(function(s){
-      if(opened||!actx){ s.getTracks().forEach(function(t){t.stop();}); return; }
-      DBG.gum='ok'; stream=s; var src=actx.createMediaStreamSource(s); an=actx.createAnalyser(); an.fftSize=1024; an.smoothingTimeConstant=.3; src.connect(an); buf=new Uint8Array(an.fftSize);
-      ready();
-    }).catch(function(e){ DBG.gum='denied '+(e&&e.name); noMic(); });
-  }
-  micBtn.hidden=true;
-  micBtn.addEventListener('click',function(e){ e.stopPropagation(); clearTimeout(autoT); startMic(); });
-  var fb=null, base=null, nb=0;
-  function sense(now){ if(!micOn||opened||!an)return;
-    var dt=Math.min(.1,(now-last)/1000); last=now;
-    an.getByteTimeDomainData(buf); var s=0; for(var i=0;i<buf.length;i++){ var v=(buf[i]-128)/128; s+=v*v; } var rms=Math.sqrt(s/buf.length);
-    if(!fb){ fb=new Float32Array(an.frequencyBinCount); base=new Float32Array(fb.length); }
-    an.getFloatFrequencyData(fb); var B=Math.min(fb.length,Math.round(4500/(actx.sampleRate/2)*fb.length)), sc=0;
-    for(var k=1;k<B;k++){ var db=Math.max(-140,isFinite(fb[k])?fb[k]:-140); if(nb<12)base[k]=(base[k]*nb+db)/(nb+1); else sc+=Math.max(0,db-base[k]); }
-    /* первые доли секунды слушаем тишину комнаты */
-    if(nb<12){ nb++; calib.push(rms); floor=calib.slice().sort(function(a,b){return a-b;})[calib.length>>1]; requestAnimationFrame(sense); return; }
-    sc/=Math.max(1,B-1);
-    var thr=Math.max(.012,floor*2.2), on=sc>7||rms>thr; DBG.rms=rms; DBG.thr=thr; DBG.sc=sc;
-    /* тишина медленно подстраивается, пока гость не дует */
-    if(sc<3)for(k=1;k<B;k++){ var d2=Math.max(-140,isFinite(fb[k])?fb[k]:-140); base[k]=base[k]*.97+d2*.03; }
-    setBlow(clamp(blow+(on?dt/.15:-dt*.8)));
-    if(blow>=1)open(false); else requestAnimationFrame(sense);
-  }
-  /* микрофон просим сразу при открытии страницы */
-  startMic();
-  /* видео так и не сообщило о готовности: всё равно планируем автозапуск */
-  setTimeout(function(){ if(!vidReady){ vidReady=true; plan(); } },6000);
+  function plan(){ if(opened||!vidReady)return; clearTimeout(autoT); autoT=setTimeout(open,3500); }
+  setTimeout(function(){ if(!vidReady){ vidReady=true; plan(); } },5000);
 
   /* ===== диагностика для проверки на телефоне: ?debug=1 ===== */
-  var DBG={play:'',anim:'',err:'',rms:0,thr:0,gum:'',sc:0};
+  var DBG={play:'',anim:'',err:''};
   window.addEventListener('error',function(e){ DBG.err=String(e.message).slice(0,60); });
   if(q.get('debug')){ var dbg=document.createElement('pre'); dbg.style.cssText='position:fixed;left:6px;right:6px;top:6px;z-index:999;margin:0;padding:6px 8px;background:rgba(0,0,0,.78);color:#9f9;font:11px/1.35 monospace;white-space:pre-wrap;pointer-events:none';
     document.body.appendChild(dbg);
-    setInterval(function(){ dbg.textContent='mic: '+(canMic?'yes':'no')+' gum='+DBG.gum+' ctx='+(actx?actx.state:'none')+' on='+micOn+' wait='+micWait+' tap='+needTap+
-      '\nlevel '+DBG.rms.toFixed(3)+' / thr '+DBG.thr.toFixed(3)+'  spec '+DBG.sc.toFixed(1)+'/7  blow '+blow.toFixed(2)+
-      '\nauto='+autoOK+' dec='+(!!window.VideoDecoder)+' video ready='+vidReady+' paused='+film.paused+' t='+film.currentTime.toFixed(2)+' play='+DBG.play+
+    setInterval(function(){ dbg.textContent='video ready='+vidReady+' paused='+film.paused+' t='+film.currentTime.toFixed(2)+' play='+DBG.play+
       '\nanim '+DBG.anim+' mode='+mode+' opened='+opened+' names='+named+(DBG.err?'\nerr '+DBG.err:'')+'\n'+navigator.userAgent.slice(0,110); },200); }
 
   /* ===== появление при прокрутке ===== */
@@ -856,12 +795,7 @@ var EVENT={
     box.classList.add('is-sent'); dockSync(); document.getElementById('done').focus(); });
   document.getElementById('again').addEventListener('click',function(){ box.classList.remove('is-sent'); box.querySelector('.t').textContent='Will you join us?'; dockSync(); form.name.focus(); });
 
-  /* ===== плавающая кнопка ответа: прячется над календарём и анкетой ===== */
-  var dock=document.getElementById('dock'), rsvp=document.getElementById('rsvp'), rsvpVis=false;
-  function dockSync(){ var past=intro.getBoundingClientRect().bottom<innerHeight*.3, dr=dsec.getBoundingClientRect(), lr=document.getElementById('letter').getBoundingClientRect(), inDate=(dr.top<innerHeight&&dr.bottom>0)||(lr.top<innerHeight&&lr.bottom>0);
-    dock.classList.toggle('is-on',named&&past&&!rsvpVis&&!inDate&&!box.classList.contains('is-sent')); }
-  addEventListener('scroll',function(){requestAnimationFrame(dockSync);},{passive:true});
-  if('IntersectionObserver' in window)new IntersectionObserver(function(es){ rsvpVis=es[0].isIntersecting; dockSync(); }).observe(rsvp);
+  function dockSync(){}
 })();
 </script>
 
