@@ -16,19 +16,17 @@
   <meta property="og:image" content="media/og.jpg">
   <meta property="og:url" content="https://invitations-agency.netlify.app/template-24/">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="preload" href="fonts/GFSDidot-normal-400.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="fonts/New_Icon_Serif.ttf" as="font" type="font/ttf" crossorigin="">
   <link rel="preload" href="fonts/AnticDidone-normal-400.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="media/logo-sd.png" as="image">
   <link rel="preload" href="media/film-ruby-first_v=2.jpg" as="image">
   <style>
     /* Typography spec: one Didone family across the site.
-       New Icon Serif is the primary face, but its file is not in the repo yet.
-       When it is, add fonts/New_Icon_Serif.ttf and append
-       url("fonts/New_Icon_Serif.ttf") format("truetype") to its src below.
-       Until then GFS Didot (served as "Didot") is what guests see. */
+       New Icon Serif (Set Sail Studios) is the primary face;
+       GFS Didot (served as "Didot") and Antic Didone are fallbacks. */
     @font-face {
       font-family: "New Icon Serif";
-      src: local("New Icon Serif"), local("NewIconSerif-Regular");
+      src: url("fonts/New_Icon_Serif.ttf") format("truetype");
       font-weight: 400;
       font-style: normal;
       font-display: swap
