@@ -21,15 +21,15 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&display=swap"
     rel="stylesheet">
-  <link rel="preload" href="fonts/RandySofia.otf" as="font" type="font/otf" crossorigin="">
+  <link rel="preload" href="fonts/AnticDidone-normal-400.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="media/logo-sd.png" as="image">
   <link rel="preload" href="media/film-ruby-first_v=2.jpg" as="image">
   <link rel="preload" href="fonts/Corinthia-normal-400.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="fonts/CormorantGaramond-normal-2.woff2" as="font" type="font/woff2" crossorigin="">
   <style>
     @font-face {
-      font-family: "Randy Sofia";
-      src: url("fonts/RandySofia.otf") format("opentype");
+      font-family: "Antic Didone";
+      src: url(fonts/AnticDidone-normal-400.woff2) format("woff2");
       font-display: swap
     }
 
@@ -81,7 +81,7 @@
       --gold2: #f3dcae;
       --pearl: #f7eee6;
       --ink: #3b0710;
-      --script: "Randy Sofia", "Playwrite BE VLG", "Corinthia", "Snell Roundhand", cursive;
+      --script: "Antic Didone", "Didot", "Bodoni 72", serif;
       --disp: "Gilda", "Didot", serif;
       --serif: "Cormorant", "Garamond", serif;
       --sans: "Lato", "Albert", system-ui, sans-serif;
@@ -313,7 +313,9 @@
     }
 
     .intro__blow {
-      font: 400 clamp(54px, 15.5vw, 92px)/.86 var(--script);
+      font: 400 clamp(32px, 9vw, 52px)/1.05 var(--script);
+      letter-spacing: .08em;
+      text-transform: uppercase;
       color: #fff7ef;
       text-shadow: 0 0 18px rgba(255, 190, 160, .5), 0 4px 30px rgba(30, 0, 6, .9)
     }
@@ -383,8 +385,9 @@
 
     .hero__names {
       margin: 12px 0 0;
-      font: 400 clamp(68px, 20vw, 122px)/1.05 var(--script);
-      font-weight: 400;
+      font: 400 clamp(54px, 16vw, 96px)/1 var(--script);
+      letter-spacing: .04em;
+      text-transform: uppercase;
       color: #fff6ee;
       text-shadow: 0 0 24px rgba(255, 170, 150, .35), 0 6px 30px rgba(20, 0, 4, .7)
     }
@@ -399,8 +402,8 @@
     }
 
     .hero__amp {
-      margin: 6px 0 4px;
-      font: italic 500 .45em/1 var(--serif);
+      margin: 10px 0 8px;
+      font: 400 .5em/1 var(--script);
       color: var(--gold2);
       opacity: 0;
       transform: scale(.6);
@@ -530,8 +533,9 @@
 
     .t {
       margin: 0;
-      font: 400 clamp(66px, 19vw, 96px)/.95 var(--script);
-      font-weight: 400;
+      font: 400 clamp(36px, 10.5vw, 56px)/1.1 var(--script);
+      letter-spacing: .06em;
+      text-transform: uppercase;
       color: #fff6ee
     }
 
@@ -674,7 +678,9 @@
 
     .letter__sig {
       margin-top: 22px;
-      font: 400 40px/1 var(--script);
+      font: 400 26px/1.2 var(--script);
+      letter-spacing: .1em;
+      text-transform: uppercase;
       color: var(--ruby)
     }
 
@@ -856,7 +862,7 @@
     }
 
     .sdate .t {
-      font-size: clamp(56px, 15vw, 80px)
+      font-size: clamp(36px, 10.5vw, 56px)
     }
 
     .sdate__card {
@@ -1181,7 +1187,9 @@
 
     .bless__sig {
       margin-top: 30px;
-      font: 400 40px/1 var(--script);
+      font: 400 26px/1.2 var(--script);
+      letter-spacing: .1em;
+      text-transform: uppercase;
       color: var(--ruby)
     }
 
@@ -1211,7 +1219,7 @@
     }
 
     .rsvp .t {
-      font-size: 58px;
+      font-size: clamp(30px, 8.6vw, 40px);
       color: var(--ruby)
     }
 
@@ -1417,7 +1425,9 @@
     .ticket__name {
       display: block;
       margin-top: 8px;
-      font: 400 46px/1 var(--script)
+      font: 400 30px/1.1 var(--script);
+      letter-spacing: .06em;
+      text-transform: uppercase
     }
 
     .ticket__plus {
@@ -1579,7 +1589,9 @@
 
     .love .s {
       margin-top: 4px;
-      font: 400 66px/.9 var(--script);
+      font: 400 clamp(44px, 13vw, 60px)/1 var(--script);
+      letter-spacing: .04em;
+      text-transform: uppercase;
       opacity: 1;
       font-style: normal;
       color: #fff6ee
@@ -1587,8 +1599,8 @@
 
     .love .s em {
       display: block;
-      margin: 4px 0;
-      font: italic 500 .45em/1 var(--serif);
+      margin: 8px 0;
+      font: 400 .5em/1 var(--script);
       color: var(--gold2)
     }
 
