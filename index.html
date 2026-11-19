@@ -921,7 +921,7 @@
       color: #b8860b
     }
 
-    @media (max-width:540px) {
+    @media (max-width:640px) {
       .couple-gallery {
         gap: 14px
       }
@@ -933,12 +933,25 @@
       }
 
       .fam-knot {
+        display: flex;
         flex-direction: row;
-        gap: 12px
+        justify-content: center;
+        align-items: center;
+        justify-self: center;
+        width: 100%;
+        margin: 0 auto;
+        gap: 14px;
+        text-align: center;
+      }
+
+      .fam-knot__amp {
+        display: inline-block;
+        text-align: center;
+        line-height: 1;
       }
 
       .fam-knot__line {
-        width: 40px;
+        width: 44px;
         height: 1px;
         background: linear-gradient(90deg, transparent, rgba(197, 155, 39, .5), transparent)
       }
