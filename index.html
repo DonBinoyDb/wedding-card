@@ -16,11 +16,35 @@
   <meta property="og:image" content="media/og.jpg">
   <meta property="og:url" content="https://invitations-agency.netlify.app/template-24/">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Corinthia:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/CinzelDecorative-Regular.ttf" as="font" type="font/ttf" crossorigin="">
+  <link rel="preload" href="fonts/CormorantGaramond-italic-1.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="fonts/New_Icon_Serif.ttf" as="font" type="font/ttf" crossorigin="">
   <link rel="preload" href="fonts/AnticDidone-normal-400.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="media/logo-sd.png" as="image">
+  <link rel="preload" href="media/Sanjo_Dhiya.svg" as="image" type="image/svg+xml">
   <link rel="preload" href="media/film-ruby-first_v=2.jpg" as="image">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Corinthia:wght@400;700&display=swap');
+
+    @font-face {
+      font-family: "Cinzel Decorative";
+      src: url("fonts/CinzelDecorative-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Cinzel Decorative";
+      src: url("fonts/CinzelDecorative-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
     /* Typography spec: one Didone family across the site.
        New Icon Serif (Set Sail Studios) is the primary face;
        GFS Didot (served as "Didot") and Antic Didone are fallbacks. */
@@ -45,6 +69,22 @@
       src: url(fonts/AnticDidone-normal-400.woff2) format("woff2");
       font-weight: 400;
       font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "Randy Sofia";
+      src: url("fonts/RandySofia.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "Cormorant Garamond";
+      src: url("fonts/CormorantGaramond-italic-1.woff2") format("woff2");
+      font-weight: 400;
+      font-style: italic;
       font-display: swap
     }
 
@@ -209,7 +249,36 @@
         right: auto;
         width: 56.25vh;
         transform: translateX(-50%);
-        box-shadow: 0 0 80px 30px rgba(18, 1, 4, .9)
+        box-shadow: 0 0 80px 30px rgba(18, 1, 4, .9);
+      }
+
+      .hero {
+        left: 50%;
+        right: auto;
+        width: 56.25vh;
+        transform: translateX(-50%);
+        top: 8.5vh;
+        padding: 0 20px;
+      }
+
+      .hero__verse {
+        max-width: 360px;
+        margin: 0 auto 18px;
+      }
+
+      .hero__quote {
+        font-size: 16px;
+        line-height: 1.42;
+      }
+
+      .hero__cite {
+        font-size: 11px;
+        margin-top: 10px;
+      }
+
+      .hero__names-svg {
+        width: 72%;
+        max-width: 420px;
       }
     }
 
@@ -225,116 +294,156 @@
       opacity: 0
     }
 
-    .intro__top,
-    .intro__hint {
-      position: absolute;
-      left: 0;
-      right: 0;
-      text-align: center;
-      pointer-events: none;
-      padding: 0 18px;
-      transition: opacity .6s ease, transform .9s var(--ease)
-    }
-
-    .intro__top {
-      top: calc(7svh + env(safe-area-inset-top))
-    }
-
-    .intro__top {
-      top: calc(9svh + env(safe-area-inset-top))
-    }
-
-    .intro__for {
-      font: italic 400 clamp(18px, 4.8vw, 22px)/1.3 var(--serif);
-      text-shadow: 0 2px 14px rgba(20, 0, 4, .95)
-    }
-
-    .intro__mono {
-      display: block;
-      margin: 14px auto 0;
-      font: 400 13px/1 var(--disp);
-      letter-spacing: .5em;
-      padding-left: .5em;
-      color: var(--gold2)
-    }
-
-    .intro__logo {
-      display: block;
-      margin: 18px auto 0;
-      width: clamp(175px, 50vw, 280px);
-      height: auto;
-      filter: drop-shadow(0 8px 30px rgba(0, 0, 0, .85)) drop-shadow(0 0 24px rgba(217, 180, 124, .5));
-      opacity: 1;
-      transition: transform .4s ease
-    }
-
-    .intro__center {
+    /* ===== Intro Redesigned: A little sparkle, a beautiful beginning... ===== */
+    .intro__content {
       position: absolute;
       left: 50%;
-      top: 47%;
+      top: 50%;
       transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 440px;
+      padding: 0 24px;
+      box-sizing: border-box;
       text-align: center;
       pointer-events: none;
-      z-index: 4;
-      width: 100%;
-      padding: 0 20px;
+      z-index: 5;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      transition: opacity .6s ease, transform .9s var(--ease)
+      justify-content: center;
+      transition: opacity .7s ease, transform .9s var(--ease);
+    }
+
+    .intro__logo-wrap {
+      position: relative;
+      margin: 0 auto;
     }
 
     .intro__logo {
       display: block;
-      width: clamp(190px, 52vw, 300px);
+      width: clamp(180px, 50vw, 245px);
       height: auto;
-      filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .85)) drop-shadow(0 0 26px rgba(217, 180, 124, .5));
-      opacity: 1;
-      transition: transform .4s ease
+      filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .9)) drop-shadow(0 0 28px rgba(240, 205, 140, .65)) drop-shadow(0 0 52px rgba(212, 163, 67, .4));
+      animation: introLogoGlow 3.5s ease-in-out infinite alternate;
     }
 
-    .intro__hint {
-      bottom: calc(64px + env(safe-area-inset-bottom))
+    @keyframes introLogoGlow {
+      0% {
+        filter: drop-shadow(0 8px 30px rgba(0, 0, 0, .9)) drop-shadow(0 0 22px rgba(240, 205, 140, .5)) drop-shadow(0 0 40px rgba(212, 163, 67, .3));
+        transform: scale(1);
+      }
+      100% {
+        filter: drop-shadow(0 8px 36px rgba(0, 0, 0, .95)) drop-shadow(0 0 34px rgba(245, 220, 160, .8)) drop-shadow(0 0 62px rgba(220, 170, 80, .55));
+        transform: scale(1.02);
+      }
     }
 
-    .intro__blow {
-      font: 400 clamp(32px, 9vw, 52px)/1.05 var(--script);
-      letter-spacing: .08em;
+    .intro__words {
+      margin-top: 22px;
+      text-align: center;
+    }
+
+    .intro__sparkle {
+      font-family: var(--serif);
+      font-size: clamp(21px, 5.8vw, 26px);
+      line-height: 1.25;
+      font-weight: 400;
+      color: #fff6ee;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 0 20px rgba(240, 200, 140, 0.35);
+    }
+
+    .intro__beginning {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(23px, 6.2vw, 29px);
+      line-height: 1.35;
+      font-weight: 400;
+      color: #f7e6ce;
+      margin-top: 4px;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 0 22px rgba(240, 200, 140, 0.4);
+    }
+
+    .intro__divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 140px;
+      margin: 18px auto 20px;
+      color: var(--gold-dark, #caa15a);
+    }
+
+    .intro__divider-line {
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, rgba(220, 175, 100, 0.75), transparent);
+    }
+
+    .intro__divider-icon {
+      flex-shrink: 0;
+      color: #dfba73;
+      filter: drop-shadow(0 0 6px rgba(223, 186, 115, 0.6));
+    }
+
+    .intro__btn-wrap {
+      margin-top: 4px;
+    }
+
+    .intro__unveil-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 30px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(225, 185, 110, 0.85);
+      background: rgba(30, 2, 7, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(212, 163, 67, 0.35), inset 0 0 12px rgba(212, 163, 67, 0.15);
+      color: #faebd7;
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #fff7ef;
-      text-shadow: 0 0 18px rgba(255, 190, 160, .5), 0 4px 30px rgba(30, 0, 6, .9)
+      animation: btnGlowPulse 2.8s ease-in-out infinite alternate;
     }
 
-    .intro__or {
-      margin-top: 12px;
-      font: italic 400 18px/1.4 var(--serif);
-      text-shadow: 0 2px 12px rgba(20, 0, 4, .95);
-      opacity: .92
+    @keyframes btnGlowPulse {
+      0% {
+        box-shadow: 0 0 16px rgba(212, 163, 67, 0.25), inset 0 0 10px rgba(212, 163, 67, 0.1);
+        border-color: rgba(220, 175, 100, 0.7);
+      }
+      100% {
+        box-shadow: 0 0 28px rgba(240, 205, 120, 0.6), inset 0 0 18px rgba(240, 205, 120, 0.25);
+        border-color: rgba(248, 220, 155, 0.95);
+      }
     }
 
-    .intro.is-go .intro__top,
-    .intro.is-go .intro__hint {
+    .intro__tap-wrap {
+      margin-top: 14px;
+    }
+
+    .intro__tap-icon {
+      display: block;
+      width: 28px;
+      height: 34px;
+      margin: 0 auto;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 10px rgba(224, 178, 94, 0.5));
+      animation: tapBounce 1.8s ease-in-out infinite;
+    }
+
+    @keyframes tapBounce {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.9; }
+      50% { transform: translateY(-5px) scale(1.06); opacity: 1; }
+    }
+
+    .intro.is-go .intro__content {
       opacity: 0;
-      pointer-events: none
-    }
-
-    .intro.is-go .intro__top,
-    .intro.is-go .intro__hint,
-    .intro.is-go .intro__center {
-      opacity: 0;
-      pointer-events: none
-    }
-
-    .intro.is-go .intro__top {
-      transform: translateY(-16px)
-    }
-
-    .intro.is-go .intro__hint {
-      transform: translateY(16px)
-    }
-
-    .intro.is-go .intro__center {
-      transform: translate(-50%, -56%) scale(.92)
+      transform: translate(-50%, -55%) scale(.92);
+      pointer-events: none;
     }
 
     /* имена появляются, как только занавес начинает раскрываться */
@@ -351,90 +460,76 @@
       position: absolute;
       left: 0;
       right: 0;
-      top: calc(6.5svh + env(safe-area-inset-top));
+      top: calc(4.5svh + env(safe-area-inset-top));
       text-align: center;
       padding: 0 16px;
-      pointer-events: none
+      pointer-events: none;
+      z-index: 5;
     }
 
-    .hero__tog {
-      font: 400 clamp(11px, 2.6vw, 13px)/1.4 var(--disp);
-      letter-spacing: .32em;
-      padding-left: .32em;
+    .hero__verse {
+      max-width: 380px;
+      margin: 0 auto clamp(10px, 2.5vh, 20px);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 1.2s ease, transform 1.2s var(--ease);
+    }
+
+    .hero__quote {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(14px, 3.8vw, 18px);
+      line-height: 1.42;
+      color: #fff4ea;
+      text-shadow: 0 2px 14px rgba(10, 0, 4, .95), 0 0 20px rgba(0, 0, 0, .7);
+      margin: 0;
+    }
+
+    .hero__cite {
+      margin-top: 10px;
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: clamp(10px, 2.4vw, 12px);
+      letter-spacing: .24em;
       text-transform: uppercase;
       color: var(--gold2);
-      text-shadow: 0 2px 14px rgba(20, 0, 4, .95);
-      opacity: 0;
-      transform: translateY(10px)
+      text-shadow: 0 2px 12px rgba(10, 0, 4, .95);
     }
 
     .hero__names {
-      margin: 14px 0 0;
-      font: 400 clamp(48px, 12vw, 68px)/1.02 var(--disp);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: #fff6ee;
-      text-shadow: 0 0 24px rgba(255, 170, 150, .35), 0 6px 30px rgba(20, 0, 4, .7)
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .hero__names span {
-      display: block
-    }
-
-    .hero__n {
-      clip-path: inset(-30% 100% -40% 0);
-      transition: clip-path 2s cubic-bezier(.45, .05, .3, 1)
-    }
-
-    .hero__amp {
-      margin: 10px 0 8px;
-      font: italic 400 .55em/1 var(--disp);
-      color: var(--gold2);
+    .hero__names-svg {
+      display: block;
+      width: clamp(250px, 73vw, 340px);
+      max-width: 82vw;
+      height: auto;
+      margin: 0 auto;
+      filter: drop-shadow(0 0 22px rgba(255, 230, 210, .35)) drop-shadow(0 4px 22px rgba(20, 0, 4, .85));
       opacity: 0;
-      transform: scale(.6);
-      transition: opacity .9s, transform 1.2s var(--spring)
-    }
-
-    .hero__date {
-      margin-top: 24px;
-      opacity: 0;
-      font: 400 22px/1 var(--disp);
-      letter-spacing: .32em;
-      padding-left: .32em;
-      color: var(--gold2)
+      transform: translateY(12px) scale(.96);
+      transition: opacity 1.4s ease, transform 1.4s var(--ease);
     }
 
     .intro.is-names .intro__shade {
-      opacity: 1
+      opacity: 1;
     }
 
-    .intro.is-names .hero__tog {
-      opacity: .92;
+    .intro.is-names .hero__verse {
+      opacity: .95;
       transform: none;
-      transition: opacity 1s ease .1s, transform 1s var(--ease) .1s
+      transition-delay: .2s;
     }
 
-    .intro.is-names .hero__n {
-      clip-path: inset(-30% -20% -40% -20%)
-    }
-
-    .intro.is-names .hero__n--1 {
-      transition-delay: .4s
-    }
-
-    .intro.is-names .hero__amp {
+    .intro.is-names .hero__names-svg {
       opacity: 1;
       transform: none;
-      transition-delay: 1.5s
-    }
-
-    .intro.is-names .hero__n--2 {
-      transition-delay: 1.7s
-    }
-
-    .intro.is-names .hero__date {
-      opacity: .95;
-      transition: opacity 1.2s ease 2.4s
+      transition-delay: .45s;
     }
 
     /* ===== секции и плавные стыки ===== */
@@ -621,63 +716,61 @@
 
     /* ===== 2 · Invitation letter: one clean ivory sheet ===== */
     .letter {
-      padding: 96px 0 104px
+      padding: 96px 0 104px;
     }
 
     .note {
       position: relative;
-      max-width: 380px;
+      max-width: clamp(330px, 90vw, 420px);
       margin: 0 auto;
-      padding: 48px 30px 40px;
-      background: var(--paper);
-      color: var(--ink);
+      padding: 44px 28px 40px;
+      background: #fbf1e7;
+      color: #68232a;
       text-align: center;
-      border-radius: 2px;
-      box-shadow: 0 30px 50px -28px rgba(10, 0, 2, .85), 0 2px 6px rgba(10, 0, 2, .25)
+      border-radius: 4px;
+      box-shadow: 0 24px 45px -18px rgba(18, 1, 4, .75), 0 2px 8px rgba(18, 1, 4, .15);
     }
 
     .note::before {
       content: "";
       position: absolute;
-      inset: 9px;
-      border: 1px solid rgba(158, 120, 47, .45);
-      pointer-events: none
+      inset: 12px;
+      border: 1px solid rgba(168, 126, 68, .5);
+      border-radius: 2px;
+      pointer-events: none;
     }
 
     .note__logo {
       display: block;
-      margin: 0 auto 22px;
-      width: 76px;
+      margin: 0 auto 28px;
+      width: clamp(125px, 34vw, 155px);
       height: auto;
-      filter: drop-shadow(0 2px 5px rgba(59, 7, 16, .22))
-    }
-
-    .note h2 {
-      margin: 0;
-      font: 500 clamp(24px, 6.4vw, 28px)/1.3 var(--serif);
-      letter-spacing: .01em;
-      color: var(--burgundy)
-    }
-
-    .note__rule {
-      display: block;
-      width: 56px;
-      height: 1px;
-      margin: 18px auto;
-      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent)
+      filter: drop-shadow(0 4px 10px rgba(59, 7, 16, .2));
     }
 
     .letter__txt {
-      font: italic 400 clamp(15px, 3.8vw, 18px)/1.6 var(--serif);
-      color: #1a0207
+      margin: 0 0 24px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(20px, 5.2vw, 25px);
+      line-height: 1.48;
+      letter-spacing: .01em;
+      color: #68232a;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, .7);
     }
 
-    .letter__sig {
-      margin-top: 22px;
-      font: 400 26px/1.2 var(--script);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ruby)
+    .note__divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 6px auto 0;
+    }
+
+    .note__divider svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
     }
 
     /* ===== 2.5 · Пара и семьи (Ivory section) ===== */
@@ -992,153 +1085,619 @@
       font: 400 17px/1.45 var(--serif)
     }
 
-    /* ===== 5 · Место (Where - Ivory Damask) ===== */
+    /* ===== 5 · Where (Ceremony & Reception) ===== */
     .s-ivory-venue {
-      background: #faf7f1 url(media/ivory-damask.jpg) center/400px;
-      color: var(--ink);
-      position: relative
+      background: #faf6f0;
+      color: #3b0710;
+      position: relative;
+      padding: 60px 18px 80px;
     }
 
     .s-ivory-venue::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, .45), rgba(245, 237, 226, .65));
-      pointer-events: none
+      background: radial-gradient(circle at 50% 15%, rgba(255, 255, 255, .7), rgba(250, 246, 240, 1) 75%);
+      pointer-events: none;
     }
 
-    .s-ivory-venue .t {
-      color: var(--ruby)
-    }
-
-    .arch {
+    .venue {
       position: relative;
-      width: min(78vw, 290px);
-      aspect-ratio: 3/4;
-      margin: 38px auto 0
-    }
-
-    .arch__in {
-      position: absolute;
-      inset: 0;
-      border-radius: 999px 999px 4px 4px;
-      overflow: hidden
-    }
-
-    .arch__in img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.14);
-      transition: transform 2.6s var(--ease)
-    }
-
-    .arch.is-in .arch__in img {
-      transform: scale(1)
-    }
-
-    .arch::before {
-      content: "";
-      position: absolute;
-      inset: -12px;
-      border: 1px solid rgba(197, 155, 39, .55);
-      border-radius: 999px 999px 8px 8px
+      max-width: 440px;
+      margin: 0 auto;
+      text-align: center;
     }
 
     .venue+.venue {
-      margin-top: 72px;
-      padding-top: 64px;
-      border-top: 1px solid rgba(158, 120, 47, .28)
+      margin-top: 68px;
+      padding-top: 56px;
+      border-top: 1px solid rgba(202, 161, 90, .28);
     }
 
-    .venue .arch {
-      margin-top: 40px
+    /* Ceremony Header: script flanked by fine gold lines */
+    .venue__ceremony-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 0 auto 16px;
+      width: 100%;
+      max-width: 360px;
     }
 
+    .venue__ceremony-header .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(202, 161, 90, 0.1), #caa15a 50%, rgba(202, 161, 90, 0.1));
+    }
+
+    .venue__ceremony-header .text {
+      font-family: 'Corinthia', 'Randy Sofia', cursive;
+      font-size: clamp(38px, 9vw, 48px);
+      font-weight: 700;
+      color: #68232a;
+      line-height: 1;
+      padding: 0 4px;
+    }
+
+    /* Reception Header & Flourish Divider */
+    .venue__rec-title {
+      margin: 16px 0 0;
+      font: 500 clamp(22px, 5.2vw, 28px)/1.2 var(--disp);
+      letter-spacing: .28em;
+      padding-left: .28em;
+      text-transform: uppercase;
+      color: #68232a;
+    }
+
+    .venue__divider {
+      margin: 10px auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .venue__divider svg {
+      width: min(80%, 170px);
+      height: auto;
+      display: block;
+    }
+
+    /* Watercolor Artwork */
+    .venue-art {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .venue-art img {
+      width: 100%;
+      height: auto;
+      max-height: 310px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      display: block;
+    }
+
+    /* Venue Names & Subtitles */
     .venue__name {
-      margin: 30px 0 0;
-      font: 400 clamp(24px, 5.5vw, 30px)/1.2 var(--disp);
-      letter-spacing: .02em;
-      color: var(--ruby)
+      margin: 16px 0 0;
+      font: 500 clamp(20px, 4.8vw, 25px)/1.25 var(--disp);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #68232a;
     }
 
     .venue__addr {
-      margin-top: 8px;
-      font: italic 400 16px/1.4 var(--serif);
-      color: var(--ink)
+      margin: 6px 0 0;
+      font: italic 400 clamp(15px, 3.8vw, 17px)/1.4 var(--serif);
+      color: #68232a;
     }
 
+    /* Rounded Pill Event Card */
     .s-ivory-venue .v-card {
-      margin: 24px auto 0;
-      max-width: 360px;
-      padding: 26px 22px 28px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, .96);
-      border: 1px solid rgba(197, 155, 39, .45);
-      box-shadow: 0 16px 36px -12px rgba(90, 8, 20, .12), 0 2px 8px rgba(0, 0, 0, .03);
-      text-align: center
+      margin: 22px auto 0;
+      max-width: 340px;
+      width: 100%;
+      padding: 16px 18px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(202, 161, 90, 0.55);
+      box-shadow: none;
+      text-align: center;
     }
 
     .v-title {
-      margin-bottom: 18px;
-      font: 600 12px/1.2 var(--sans);
-      letter-spacing: .25em;
-      padding-left: .25em;
+      margin: 0 0 12px;
+      font: 600 12.5px/1.3 var(--disp);
+      letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--gold-dark)
+      color: #68232a;
+    }
+
+    /* Golden Pill Button */
+    .btn--gold-pill {
+      display: inline-block;
+      padding: 11px 26px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #edd69e 0%, #caa15a 100%);
+      color: #431c0b;
+      font: 700 11px/1 var(--disp);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(180, 130, 60, .32);
+      border: none;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+
+    .btn--gold-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(180, 130, 60, .42);
+      filter: brightness(1.03);
+    }
+
+    .btn--gold-pill:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(180, 130, 60, .28);
     }
 
 
-    /* ===== 6 · Their story: numbered milestones on a thin gold line ===== */
-    .story {
+    /* ===== 6 · Their Story: Native Live HTML/CSS Card with Animated Path ===== */
+    .s-story {
+      background: #faf6f0;
+      color: #3b0710;
       position: relative;
-      margin: 48px auto 0;
-      padding: 0;
-      max-width: 360px;
-      list-style: none
+      padding: 60px 18px 80px;
+      border-top: 1px solid rgba(202, 161, 90, 0.22);
     }
 
-    .story::before {
+    .s-story::before {
       content: "";
       position: absolute;
-      left: 50%;
-      top: 8px;
-      bottom: 8px;
-      width: 1px;
-      background: linear-gradient(transparent, rgba(217, 180, 124, .45) 8%, rgba(217, 180, 124, .45) 92%, transparent)
+      inset: 0;
+      background: radial-gradient(circle at 50% 15%, rgba(255, 255, 255, .7), rgba(250, 246, 240, 1) 75%);
+      pointer-events: none;
     }
 
-    .story__item {
+    .s-story .t {
+      color: #68232a;
+    }
+
+    /* The Native Story Timeline Container (Full-width on mobile, no border) */
+    .story-card-native {
       position: relative;
-      padding: 18px 8px;
-      background: radial-gradient(closest-side, rgba(44, 5, 12, .92), rgba(44, 5, 12, .82) 70%, transparent)
+      width: 100%;
+      max-width: 520px;
+      margin: 20px auto 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 10px 4px 40px;
+      box-shadow: none;
+      overflow: visible;
     }
 
-    .story__item+.story__item {
-      margin-top: 30px
+    @media (max-width: 600px) {
+      .s-story {
+        padding: 50px 10px 75px;
+      }
+      .s-story .wrap {
+        padding-left: 4px;
+        padding-right: 4px;
+        max-width: 100%;
+      }
+      .story-card-native {
+        max-width: 100%;
+        margin-top: 14px;
+        padding: 6px 0 30px;
+      }
+      .story-timeline {
+        gap: clamp(60px, 11vh, 85px);
+      }
+      .story-row {
+        gap: 10px;
+      }
+      .story-col--art {
+        flex: 0 0 38%;
+        max-width: 135px;
+      }
+      .story-col--text {
+        flex: 0 0 48%;
+        max-width: 180px;
+      }
+      .story-row--rev .story-col--art {
+        flex: 0 0 40%;
+        max-width: 140px;
+      }
+      .story-row--rev .story-col--text {
+        flex: 0 0 48%;
+        max-width: 180px;
+      }
     }
 
-    .story__no {
-      display: inline-block;
-      font: 400 15px/1 var(--disp);
-      letter-spacing: .2em;
-      padding: 8px 4px 8px 12px;
-      color: var(--gold2);
-      border-top: 1px solid rgba(217, 180, 124, .55);
-      border-bottom: 1px solid rgba(217, 180, 124, .55)
+    /* SVG Layer for Dotted Trail - strictly BEHIND the illustrations */
+    .story-card-native__svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    .story__h {
-      margin: 16px 0 0;
-      font: 400 clamp(26px, 7vw, 32px)/1.15 var(--disp);
-      color: #fbf3e4
+    .story-path-trail {
+      fill: none;
+      stroke: #8a333f;
+      stroke-width: 2.2;
+      stroke-dasharray: 2.5 5.5;
+      stroke-linecap: round;
+      will-change: stroke-dashoffset;
     }
 
-    .story__p {
-      margin-top: 10px;
-      font: italic 400 18.5px/1.6 var(--serif);
-      color: var(--pearl);
-      opacity: .9
+    #storyLiveHead {
+      will-change: transform, opacity;
+      filter: drop-shadow(0 0 3px rgba(138, 51, 63, 0.6));
+      transition: opacity 0.2s ease;
+    }
+
+    /* Leaf decorations on the trail with natural botanical tilt */
+    .story-leaf {
+      position: absolute;
+      width: 26px;
+      height: auto;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #storyLeaf1 { transform: translate(-50%, -50%) rotate(22deg) scale(0.6); }
+    #storyLeaf2 { transform: translate(-50%, -50%) rotate(-30deg) scaleX(-1) scale(0.6); }
+    #storyLeaf3 { transform: translate(-50%, -50%) rotate(25deg) scale(0.6); }
+    #storyLeaf4 { transform: translate(-50%, -50%) rotate(-12deg) scale(0.6); }
+
+    #storyLeaf1.is-reached { transform: translate(-50%, -50%) rotate(22deg) scale(1); opacity: 1; }
+    #storyLeaf2.is-reached { transform: translate(-50%, -50%) rotate(-30deg) scaleX(-1) scale(1); opacity: 1; }
+    #storyLeaf3.is-reached { transform: translate(-50%, -50%) rotate(25deg) scale(1); opacity: 1; }
+    #storyLeaf4.is-reached { transform: translate(-50%, -50%) rotate(-12deg) scale(1); opacity: 1; }
+
+    /* Timeline and Rows - generous vertical space between milestones */
+    .story-timeline {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(65px, 12vh, 95px);
+    }
+
+    .story-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      opacity: 0.35;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .story-row.is-reached {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Column Sizing */
+    .story-col--art {
+      flex: 0 0 38%;
+      max-width: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 5; /* illustration firmly in front of SVG path */
+    }
+
+    .story-col--text {
+      flex: 0 0 48%;
+      max-width: 200px;
+      min-width: 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .story-row--rev .story-col--text {
+      flex: 0 0 48%;
+      max-width: 200px;
+      text-align: left;
+    }
+
+    .story-row--rev .story-col--art {
+      flex: 0 0 40%;
+      max-width: 155px;
+    }
+
+    /* Art image wrappers and anchors - behind art */
+    .story-art-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      z-index: 5;
+    }
+
+    .story-anchor {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* Anchor positions placed safely underneath illustrations */
+    .story-row--1 .story-anchor {
+      right: 18%;
+      bottom: 18%;
+    }
+
+    .story-row--2 .story-anchor {
+      left: 15%;
+      bottom: 20%;
+    }
+
+    .story-row--3 .story-anchor {
+      right: 10%;
+      bottom: 12%;
+    }
+
+    .story-row--4 .story-anchor {
+      left: 15%;
+      bottom: 20%;
+    }
+
+    .story-anchor--end {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    /* Illustrations with gentle backing so path ducks behind them cleanly */
+    .story-art {
+      width: 100%;
+      height: auto;
+      max-height: 125px;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 5;
+      background: radial-gradient(circle, rgba(250, 246, 240, 0.92) 55%, rgba(250, 246, 240, 0) 80%);
+      border-radius: 50%;
+    }
+
+    .story-art--envelope {
+      max-width: 120px;
+    }
+
+    .story-art--seaside {
+      max-width: 155px;
+    }
+
+    .story-art--couple {
+      max-width: 168px;
+    }
+
+    .story-art--ring {
+      max-width: 130px;
+    }
+
+    /* Typography */
+    .story-title {
+      font-family: 'Corinthia', 'Randy Sofia', cursive;
+      font-size: clamp(34px, 8.2vw, 42px);
+      font-weight: 700;
+      color: #7a202d;
+      line-height: 1.05;
+      margin: 0 0 6px;
+      padding: 0;
+    }
+
+    .story-desc {
+      font-family: var(--serif);
+      font-size: clamp(14px, 3.6vw, 15.5px);
+      line-height: 1.45;
+      color: #4a1f18;
+      margin: 0;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* ===== 6.5 · Forever Begins: Scratch-to-Reveal Card Section ===== */
+    .s-reveal {
+      padding: 50px 16px 75px;
+      position: relative;
+    }
+
+    .reveal-card {
+      position: relative;
+      background: #fdf6ee;
+      border: 1.5px solid #8a333f;
+      border-radius: 28px;
+      padding: 32px 18px 26px;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 14px 44px rgba(44, 5, 12, 0.12);
+      text-align: center;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .reveal-card::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(138, 51, 63, 0.4);
+      border-radius: 23px;
+      pointer-events: none;
+    }
+
+    .reveal-card__orn-top,
+    .reveal-card__orn-bot {
+      display: flex;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .reveal-card__orn-top img,
+    .reveal-card__orn-bot img {
+      width: 86px;
+      height: auto;
+      display: block;
+    }
+
+    .reveal-card__title-wrap {
+      margin: 10px auto 4px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .reveal-card__title-img {
+      width: 84%;
+      max-width: 380px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 1px 2px rgba(112, 29, 41, 0.12));
+    }
+
+    .reveal-card__divider {
+      display: flex;
+      justify-content: center;
+      margin: 4px auto 10px;
+    }
+
+    .reveal-card__divider img {
+      width: 140px;
+      height: auto;
+      display: block;
+    }
+
+    .reveal-card__subtitle {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(14px, 3.8vw, 17px);
+      line-height: 1.45;
+      color: #2c050c;
+      max-width: 330px;
+      margin: 0 auto 18px;
+    }
+
+    .reveal-scratch {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 590 / 420;
+      margin: 0 auto 14px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .reveal-leaf {
+      position: absolute;
+      pointer-events: none;
+      z-index: 5;
+      height: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+    }
+
+    .reveal-leaf--tl {
+      top: -12px;
+      left: -8px;
+      width: 25%;
+      max-width: 105px;
+    }
+
+    .reveal-leaf--br {
+      bottom: -10px;
+      right: -8px;
+      width: 25%;
+      max-width: 105px;
+    }
+
+    .reveal-underlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reveal-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 16px rgba(112, 29, 41, 0.18));
+    }
+
+    .reveal-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      cursor: grab;
+      touch-action: none;
+      border-radius: 12px;
+      transition: opacity 0.8s ease;
+    }
+
+    .reveal-canvas:active {
+      cursor: grabbing;
+    }
+
+    .reveal-sparkles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 6;
+      overflow: hidden;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background: radial-gradient(circle, #fce096 0%, #d4a343 70%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparklePop 1.5s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+    }
+
+    @keyframes sparklePop {
+      0% { transform: scale(0) translate(0, 0); opacity: 1; }
+      50% { transform: scale(1.6) translate(var(--tx, 20px), var(--ty, -30px)); opacity: 1; }
+      100% { transform: scale(0.2) translate(calc(var(--tx, 20px) * 1.5), calc(var(--ty, -30px) * 1.5 + 40px)); opacity: 0; }
     }
 
     /* ===== 7 · Blessings & wishes: one letter sheet ===== */
@@ -1188,6 +1747,192 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--ruby)
+    }
+
+    /* ===== 7.1 · Wish Form & Wall ===== */
+    .wish-form-card {
+      position: relative;
+      margin-top: 32px;
+      padding: 34px 24px 28px;
+      background: #fdf6ee;
+      border: 1.5px solid #8a333f;
+      border-radius: 16px;
+      box-shadow: 0 14px 36px -18px rgba(59, 7, 16, 0.45);
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    .wish-form-card::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(138, 51, 63, 0.35);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .wish-form-card__head {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .wish-form-card__title {
+      margin: 0;
+      font: 400 clamp(20px, 5.2vw, 25px)/1.2 var(--disp);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #701d29;
+    }
+
+    .wish-form-card__sub {
+      margin: 6px 0 0;
+      font: italic 400 15px/1.4 var(--serif);
+      color: #551a23;
+      opacity: 0.85;
+    }
+
+    .wish-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .wish-form .f {
+      margin: 0;
+    }
+
+    .wish-form label {
+      display: block;
+      font: 600 14px/1.2 var(--serif);
+      color: #701d29;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .wish-form .in {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(138, 51, 63, 0.3);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: var(--serif);
+      font-size: 16px;
+      color: #2c050c;
+      box-sizing: border-box;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+
+    .wish-form .in:focus {
+      background: #ffffff;
+      border-color: #8a333f;
+      box-shadow: 0 0 0 3px rgba(138, 51, 63, 0.12);
+      outline: none;
+    }
+
+    .wish-form textarea.in {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .wish-form__success {
+      background: #eef7ed;
+      border: 1px solid #94c590;
+      color: #235c20;
+      border-radius: 6px;
+      padding: 11px 14px;
+      text-align: center;
+      font: 600 15px/1.4 var(--serif);
+      animation: fadeIn 0.4s ease;
+    }
+
+    /* Live Wishes Wall */
+    .wishes-wall {
+      margin-top: 40px;
+    }
+
+    .wishes-wall__head {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .wishes-wall__title {
+      margin: 0;
+      font: 400 clamp(19px, 4.8vw, 22px)/1.3 var(--disp);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+    }
+
+    .wishes-wall__orn {
+      color: var(--gold-dark);
+      font-size: 16px;
+      margin-top: 4px;
+      opacity: 0.75;
+    }
+
+    .wishes-wall__list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .wish-card {
+      position: relative;
+      background: #fdfaf6;
+      border: 1px solid rgba(138, 51, 63, 0.2);
+      border-radius: 10px;
+      padding: 18px 20px 16px;
+      box-shadow: 0 4px 14px rgba(44, 5, 12, 0.05);
+      text-align: left;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .wish-card--new {
+      animation: wishSlideIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      background: #fffcf7;
+      border-color: #caa15a;
+      box-shadow: 0 6px 20px rgba(202, 161, 90, 0.25);
+    }
+
+    @keyframes wishSlideIn {
+      0% { opacity: 0; transform: translateY(-16px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .wish-card__meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed rgba(138, 51, 63, 0.15);
+      padding-bottom: 6px;
+    }
+
+    .wish-card__author {
+      font: 600 17px/1.2 var(--serif);
+      color: #701d29;
+      letter-spacing: 0.02em;
+    }
+
+    .wish-card__time {
+      font: italic 400 13px/1 var(--serif);
+      color: #777;
+    }
+
+    .wish-card__text {
+      margin: 0;
+      font: 400 16px/1.55 var(--serif);
+      color: #2c050c;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .wishes-wall__loading,
+    .wishes-wall__empty {
+      text-align: center;
+      font: italic 400 15px/1.4 var(--serif);
+      color: #666;
+      padding: 16px;
     }
 
     /* ===== 8 · Анкета ===== */
@@ -1571,10 +2316,22 @@
 
     .love__logo {
       display: block;
-      margin: 0 auto 16px;
-      width: clamp(80px, 22vw, 120px);
+      margin: 0 auto;
+      width: clamp(140px, 36vw, 210px);
       height: auto;
-      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .6)) drop-shadow(0 0 10px rgba(243, 220, 174, .3))
+      filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .65)) drop-shadow(0 0 24px rgba(243, 220, 174, .75)) drop-shadow(0 0 45px rgba(212, 163, 67, .5));
+      animation: loveLogoPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes loveLogoPulse {
+      0% {
+        filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .65)) drop-shadow(0 0 18px rgba(243, 220, 174, .65)) drop-shadow(0 0 32px rgba(212, 163, 67, .4));
+        transform: scale(1);
+      }
+      100% {
+        filter: drop-shadow(0 4px 22px rgba(0, 0, 0, .75)) drop-shadow(0 0 30px rgba(243, 220, 174, .95)) drop-shadow(0 0 55px rgba(212, 163, 67, .65));
+        transform: scale(1.025);
+      }
     }
 
     .love p {
@@ -1723,23 +2480,42 @@
     <div class="intro__shade" aria-hidden="true"></div>
     <div class="intro__veil" aria-hidden="true"></div>
 
-    <div class="intro__top">
-      <p class="intro__for" id="introFor">An invitation is hiding under the glitter</p>
-    </div>
-
-    <div class="intro__center">
-      <img class="intro__logo" src="media/logo-sd.png" alt="S &amp; D Monogram">
-    </div>
-
-    <div class="intro__hint">
-      <p class="intro__blow" id="introBlow">Tap anywhere</p>
-      <p class="intro__or" id="introOr">to open your invitation</p>
+    <div class="intro__content">
+      <div class="intro__logo-wrap">
+        <img class="intro__logo" src="media/logo-sd.png" alt="S &amp; D Monogram">
+      </div>
+      <div class="intro__words">
+        <p class="intro__sparkle">A little sparkle,</p>
+        <p class="intro__beginning">a beautiful beginning...</p>
+      </div>
+      <div class="intro__divider" aria-hidden="true">
+        <span class="intro__divider-line"></span>
+        <svg class="intro__divider-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 2C12 2 13.5 6.5 16 8C18.5 9.5 22 9.5 22 9.5C22 9.5 18.5 11 16 12.5C13.5 14 12 18 12 18C12 18 10.5 14 8 12.5C5.5 11 2 9.5 2 9.5C2 9.5 5.5 9.5 8 8C10.5 6.5 12 2 12 2Z"/>
+        </svg>
+        <span class="intro__divider-line"></span>
+      </div>
+      <div class="intro__btn-wrap">
+        <div class="intro__unveil-btn">
+          <span>TAP TO UNVEIL</span>
+        </div>
+      </div>
+      <div class="intro__tap-wrap" aria-hidden="true">
+        <svg class="intro__tap-icon" viewBox="0 0 32 38" fill="none" stroke="currentColor">
+          <path d="M16 2v4M9 5l2.5 2.5M23 5l-2.5 2.5" stroke="#fce096" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M16 11v11a2.2 2.2 0 0 0 2.2 2.2h0a2.2 2.2 0 0 0 2.2-2.2v-4a1.8 1.8 0 0 1 3.6 0v4.5c0 5-3.5 8.5-8 8.5s-8-3.5-8-8.5v-3.5a1.8 1.8 0 0 1 3.6 0v1a1.8 1.8 0 0 1 3.6 0v-9a1.8 1.8 0 0 1 3.6 0z" stroke="#e0b25e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="rgba(224, 178, 94, 0.15)"/>
+        </svg>
+      </div>
     </div>
 
     <div class="hero" aria-live="polite">
-      <p class="hero__tog">We Are Getting Married</p>
-      <h1 class="hero__names"><span class="hero__n hero__n--1">Sanjo</span><span class="hero__amp">&amp;</span><span
-          class="hero__n hero__n--2">Dhiya</span></h1>
+      <div class="hero__verse">
+        <p class="hero__quote">“Love knows no limit to its endurance,<br>no end to its trust. Love still stands<br>when all else has fallen.”</p>
+        <p class="hero__cite">— 1 CORINTHIANS 13:7-8 —</p>
+      </div>
+      <h1 class="hero__names">
+        <img class="hero__names-svg" src="media/Sanjo_Dhiya.svg" alt="Sanjo &amp; Dhiya" width="2788" height="1943">
+      </h1>
     </div>
   </header>
 
@@ -1750,11 +2526,34 @@
       <div class="wrap">
         <article class="note rv" id="note">
           <img class="note__logo" src="media/logo-sd.png" alt="S &amp; D Monogram">
-          <h2 id="dear">Together with our families,</h2>
-          <span class="note__rule" aria-hidden="true"></span>
-          <p class="letter__txt">We would be delighted to have you join us as we celebrate the beginning of our
-            forever.</p>
-          <p class="letter__sig">Sanjo &amp; Dhiya</p>
+          <p class="letter__txt">
+            <span id="dear">Together with our families,</span><br>
+            we would be delighted to have you<br>
+            join us as we celebrate the<br>
+            beginning of our forever.
+          </p>
+          <div class="note__divider" aria-hidden="true">
+            <svg width="180" height="18" viewBox="0 0 180 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 9H78" stroke="url(#goldL)" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M90 1.5L92.2 7.2L97.5 9L92.2 10.8L90 16.5L87.8 10.8L82.5 9L87.8 7.2Z" fill="url(#goldStar)"/>
+              <path d="M102 9H170" stroke="url(#goldR)" stroke-width="1.2" stroke-linecap="round"/>
+              <defs>
+                <linearGradient id="goldL" x1="10" y1="9" x2="78" y2="9" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#caa466" stop-opacity="0.1"/>
+                  <stop offset="1" stop-color="#caa466"/>
+                </linearGradient>
+                <linearGradient id="goldR" x1="102" y1="9" x2="170" y2="9" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#caa466"/>
+                  <stop offset="1" stop-color="#caa466" stop-opacity="0.1"/>
+                </linearGradient>
+                <linearGradient id="goldStar" x1="82" y1="1.5" x2="98" y2="16.5" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#e3c78d"/>
+                  <stop offset="0.5" stop-color="#b88b48"/>
+                  <stop offset="1" stop-color="#dfbf80"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
         </article>
       </div>
     </section>
@@ -1764,7 +2563,6 @@
       data-block-name="2.5 · The Couple & Families">
       <div class="wrap">
         <h2 class="t rv">Sanjo &amp; Dhiya</h2>
-        <p class="sub rv">With the blessings of our parents</p>
 
         <div class="couple-gallery rv">
           <figure class="couple-card">
@@ -1844,74 +2642,191 @@
   </section>
   -->
 
-    <!-- 5 · Ceremony & Reception: image, venue name, address, then the event card -->
+    <!-- 5 · Ceremony & Reception: watercolor artwork, titles, flourish & event cards -->
     <section class="sec s-ivory-venue" id="venues" data-block="venue" data-block-name="5 · Ceremony &amp; Reception">
       <div class="wrap">
-        <h2 class="t rv">Where</h2>
 
         <article class="venue">
-          <!-- Venue photo: replace with a photo of St. Joseph Church, Mankavu when supplied -->
-          <figure class="arch rv">
-            <div class="arch__in"><img src="media/table-red.jpg" alt="St. Joseph Church, Mankavu" loading="lazy"></div>
+          <div class="venue__ceremony-header rv">
+            <span class="line" aria-hidden="true"></span>
+            <span class="text">Ceremony</span>
+            <span class="line" aria-hidden="true"></span>
+          </div>
+          <figure class="venue-art rv">
+            <img src="media/church.png" alt="St. Joseph Church, Mankavu" loading="lazy">
           </figure>
           <h3 class="venue__name rv">St. Joseph Church</h3>
           <p class="venue__addr rv">Mankavu, Kozhikode, Kerala</p>
           <div class="v-card rv">
             <p class="v-title">Wedding Ceremony · 3:00 PM</p>
-            <a class="btn btn--gold"
+            <a class="btn--gold-pill"
               href="https://www.google.com/maps/search/?api=1&amp;query=St.+Joseph+Church+Mankavu" target="_blank"
               rel="noopener">Directions to Church</a>
           </div>
         </article>
 
         <article class="venue">
-          <!-- Venue photo: replace with a photo of Capkon City, Pantheerankavu when supplied -->
-          <figure class="arch rv">
-            <div class="arch__in"><img src="media/table-red.jpg" alt="Capkon City, Pantheerankavu" loading="lazy"></div>
+          <figure class="venue-art rv">
+            <img src="media/reception.png" alt="Capkon City Reception" loading="lazy">
           </figure>
-          <h3 class="venue__name rv">Capkon City</h3>
+          <h3 class="venue__rec-title rv">Reception</h3>
+          <div class="venue__divider rv" aria-hidden="true">
+            <svg viewBox="0 0 160 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="7" x2="65" y2="7" stroke="#caa15a" stroke-width="0.8" opacity="0.8"/>
+              <path d="M 80 2 C 82 5, 87 7, 90 7 C 87 7, 82 9, 80 12 C 78 9, 73 7, 70 7 C 73 7, 78 5, 80 2 Z" fill="#caa15a"/>
+              <circle cx="80" cy="7" r="1.5" fill="#faf6f0"/>
+              <circle cx="72" cy="7" r="1" fill="#caa15a"/>
+              <circle cx="88" cy="7" r="1" fill="#caa15a"/>
+              <line x1="95" y1="7" x2="160" y2="7" stroke="#caa15a" stroke-width="0.8" opacity="0.8"/>
+            </svg>
+          </div>
+          <h4 class="venue__name rv">Capkon City</h4>
           <p class="venue__addr rv">Pantheerankavu, Kozhikode, Kerala</p>
           <div class="v-card rv">
-            <p class="v-title">Wedding Reception · 6:00 PM</p>
-            <a class="btn btn--gold"
+            <p class="v-title">Wedding Reception · 6:00 PM Onwards</p>
+            <a class="btn--gold-pill"
               href="https://www.google.com/maps/search/?api=1&amp;query=Capkon+City+Pantheerankavu" target="_blank"
               rel="noopener">Directions to Reception</a>
           </div>
         </article>
+
       </div>
     </section>
 
-    <!-- 6 · Their story: five milestones -->
-    <section class="sec s-silk" id="story" data-block="story" data-block-name="6 · Their Story">
+    <!-- 6 · Their Story: Native Live HTML/CSS Card with Animated Scroll Path -->
+    <section class="sec s-story" id="story" data-block="story" data-block-name="6 · Their Story">
       <div class="wrap">
         <h2 class="t rv">Their Story</h2>
-        <ol class="story">
-          <li class="story__item rv">
-            <span class="story__no">01</span>
-            <h3 class="story__h">A Little Thought</h3>
-            <p class="story__p">One beautiful thought from our families became the beginning of something special.</p>
-          </li>
-          <li class="story__item rv">
-            <span class="story__no">02</span>
-            <h3 class="story__h">The First Meeting</h3>
-            <p class="story__p">A seaside table, two cups of coffee and our very first meeting.</p>
-          </li>
-          <li class="story__item rv">
-            <span class="story__no">03</span>
-            <h3 class="story__h">Lost in Conversation</h3>
-            <p class="story__p">One conversation turned into hours of talking, laughter and getting to know each other.</p>
-          </li>
-          <li class="story__item rv">
-            <span class="story__no">04</span>
-            <h3 class="story__h">A Simple Yes</h3>
-            <p class="story__p">Perhaps love doesn't always begin with butterflies. Sometimes it begins with a simple yes and grows into something beautiful.</p>
-          </li>
-          <li class="story__item rv">
-            <span class="story__no">05</span>
-            <h3 class="story__h">Forever Begins</h3>
-            <p class="story__p">Two families, two hearts, a beautiful future with God's blessings.</p>
-          </li>
-        </ol>
+
+        <div class="story-card-native rv" id="storyNativeCard">
+          <!-- Dynamic SVG Trail Layer -->
+          <svg class="story-card-native__svg" id="storyNativeSvg" aria-hidden="true">
+            <defs>
+              <mask id="storyLiveMask">
+                <path id="storyLiveMaskPath" d="" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" />
+              </mask>
+            </defs>
+            <path id="storyLivePath" class="story-path-trail" d="" mask="url(#storyLiveMask)" />
+            <circle id="storyLiveHead" r="3.2" fill="#8a333f" opacity="0" />
+          </svg>
+
+          <!-- Animated Leaf Sprigs along the curve -->
+          <img src="media/story-leaf@2x.png" id="storyLeaf1" class="story-leaf" alt="" aria-hidden="true">
+          <img src="media/story-leaf@2x.png" id="storyLeaf2" class="story-leaf" alt="" aria-hidden="true">
+          <img src="media/story-leaf@2x.png" id="storyLeaf3" class="story-leaf" alt="" aria-hidden="true">
+          <img src="media/story-leaf@2x.png" id="storyLeaf4" class="story-leaf" alt="" aria-hidden="true">
+
+          <!-- Real HTML Milestones -->
+          <div class="story-timeline">
+
+            <!-- Milestone 1 -->
+            <div class="story-row story-row--1" data-step="1">
+              <div class="story-col story-col--art">
+                <div class="story-art-wrap">
+                  <img src="media/story-envelope@2x.png" alt="Wax sealed envelope with flowers" class="story-art story-art--envelope" loading="lazy">
+                  <span class="story-anchor" id="storyAnchor1"></span>
+                </div>
+              </div>
+              <div class="story-col story-col--text">
+                <h3 class="story-title">A Little Thought</h3>
+                <p class="story-desc">One beautiful thought from our families became the beginning of something special.</p>
+              </div>
+            </div>
+
+            <!-- Milestone 2 -->
+            <div class="story-row story-row--2 story-row--rev" data-step="2">
+              <div class="story-col story-col--text">
+                <h3 class="story-title">The First Meeting</h3>
+                <p class="story-desc">A seaside table , two cups of Coffee and our very first meeting.</p>
+              </div>
+              <div class="story-col story-col--art">
+                <div class="story-art-wrap">
+                  <img src="media/story-seaside@2x.png" alt="Seaside coffee table and sunset" class="story-art story-art--seaside" loading="lazy">
+                  <span class="story-anchor" id="storyAnchor2"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Milestone 3 -->
+            <div class="story-row story-row--3" data-step="3">
+              <div class="story-col story-col--art">
+                <div class="story-art-wrap">
+                  <img src="media/story-couple@2x.png" alt="Couple laughing in conversation" class="story-art story-art--couple" loading="lazy">
+                  <span class="story-anchor" id="storyAnchor3"></span>
+                </div>
+              </div>
+              <div class="story-col story-col--text">
+                <h3 class="story-title">Lost in Conversation</h3>
+                <p class="story-desc">One Conversation turned into hours of talking , laughter and getting to know each other.</p>
+              </div>
+            </div>
+
+            <!-- Milestone 4 -->
+            <div class="story-row story-row--4 story-row--rev" data-step="4">
+              <div class="story-col story-col--text">
+                <h3 class="story-title">A Simple Yes</h3>
+                <p class="story-desc">Perhaps love doesn’t always begin with butterflies. Sometimes it begin with simple Yes and grows into something beautiful.</p>
+              </div>
+              <div class="story-col story-col--art">
+                <div class="story-art-wrap">
+                  <img src="media/story-ring@2x.png" alt="Velvet ring box with diamond ring" class="story-art story-art--ring" loading="lazy">
+                  <span class="story-anchor" id="storyAnchor4"></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <span class="story-anchor--end" id="storyAnchor5"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.5 · Forever Begins: Scratch to Reveal Section -->
+    <section class="sec s-reveal" id="reveal" data-block="reveal" data-block-name="Forever Begins">
+      <div class="wrap">
+        <div class="reveal-card rv">
+          <!-- Top Flourish Ornament -->
+          <div class="reveal-card__orn-top">
+            <img src="media/card-flourish-top.png" alt="" aria-hidden="true" loading="lazy">
+          </div>
+
+          <!-- Script Title -->
+          <div class="reveal-card__title-wrap">
+            <img src="media/card-title-forever.png" alt="Forever Begins" class="reveal-card__title-img" loading="lazy">
+          </div>
+
+          <!-- Gold Diamond Divider -->
+          <div class="reveal-card__divider">
+            <img src="media/card-divider-gold.png" alt="" aria-hidden="true" loading="lazy">
+          </div>
+
+          <!-- Subtitle -->
+          <p class="reveal-card__subtitle">Two families, two hearts, a beautiful future with God's blessings.</p>
+
+          <!-- Interactive Scratch Card Box -->
+          <div class="reveal-scratch" id="revealScratchBox">
+            <!-- Botanical Framing Leaves -->
+            <img src="media/scratch-leaf-tl.png" class="reveal-leaf reveal-leaf--tl" alt="" aria-hidden="true" loading="lazy">
+            <img src="media/scratch-leaf-br.png" class="reveal-leaf reveal-leaf--br" alt="" aria-hidden="true" loading="lazy">
+
+            <!-- Underlay Photo (reveal.jpg) -->
+            <div class="reveal-underlay">
+              <img src="media/reveal-photo.png" alt="Sanjo and Dhiya celebrating together" class="reveal-photo" id="revealPhotoImg" loading="lazy">
+            </div>
+
+            <!-- Interactive Scratch Canvas Layer -->
+            <canvas class="reveal-canvas" id="revealCanvas" width="590" height="420" aria-label="Scratch to reveal photo"></canvas>
+
+            <!-- Confetti Celebration Overlay -->
+            <div class="reveal-sparkles" id="revealSparkles" aria-hidden="true"></div>
+          </div>
+
+          <!-- Bottom Flourish Ornament -->
+          <div class="reveal-card__orn-bot">
+            <img src="media/card-flourish-bot.png" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1938,6 +2853,45 @@
               all your favorite candid smiles and celebrations during the reception!</p>
           </article>
           <p class="bless__sig">Sanjo &amp; Dhiya</p>
+        </div>
+
+        <!-- Add Your Blessing Form Card -->
+        <div class="wish-form-card rv">
+          <div class="wish-form-card__head">
+            <h3 class="wish-form-card__title">Add Your Blessing</h3>
+            <p class="wish-form-card__sub">Leave your love, prayers, and heartfelt wishes for Sanjo &amp; Dhiya</p>
+          </div>
+          <form id="wishForm" class="wish-form" novalidate="">
+            <div class="f">
+              <label for="wishAuthor">Your Name</label>
+              <input class="in" id="wishAuthor" name="name" required="" placeholder="e.g. John &amp; Sarah" autocomplete="name">
+              <p class="err" id="wishAuthorErr" hidden="">Please enter your name</p>
+            </div>
+            <div class="f">
+              <label for="wishText">Your Message</label>
+              <textarea class="in" id="wishText" name="message" required="" placeholder="May God bless your journey together with infinite love and joy..."></textarea>
+              <p class="err" id="wishTextErr" hidden="">Please write a short blessing or wish</p>
+            </div>
+            <button class="btn btn--gold btn--wide" type="submit" id="wishSubmitBtn">
+              <span>Add Blessing</span>
+            </button>
+            <div class="wish-form__success" id="wishSuccessMsg" hidden="">
+              <span>&#10022; Thank you for your heartfelt blessing!</span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Live Blessings Wall -->
+        <div class="wishes-wall rv" id="wishesWallSection">
+          <div class="wishes-wall__head">
+            <h3 class="wishes-wall__title">Words of Love &amp; Blessings</h3>
+            <div class="wishes-wall__orn">&#10086;</div>
+          </div>
+          <div class="wishes-wall__list" id="wishesList">
+            <div class="wishes-wall__loading" id="wishesLoading">
+              <span>Loading blessings...</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2056,8 +3010,6 @@
         </div>
         <div class="love rv">
           <img class="love__logo" src="media/logo-sd.png" alt="S &amp; D Monogram">
-          <p>With love,</p>
-          <p class="s">Sanjo<em>&amp;</em>Dhiya</p>
         </div>
       </div>
     </section>
@@ -2083,7 +3035,8 @@
       /* именное приглашение: ?g=Olivia */
       var guest = (q.get('g') || '').trim().slice(0, 60);
       if (guest) {
-        document.getElementById('introFor').textContent = guest + ', your invitation is under the glitter';
+        var iFor = document.getElementById('introFor');
+        if (iFor) iFor.textContent = guest + ', your invitation is under the glitter';
         var hf = document.getElementById('heroFor'); if (hf) hf.textContent = 'Dear ' + guest + ',';
         document.getElementById('dear').textContent = 'Dear ' + guest + ',';
         document.getElementById('gName').value = guest;
@@ -2250,6 +3203,499 @@
         addEventListener('scroll', eveTick, { passive: true }); eveTick();
       }
 
+      /* ===== 6 · Their Story: Dynamic Path Generation & Scroll Animation ===== */
+      var storyCard = document.getElementById('storyNativeCard');
+      var storySvg = document.getElementById('storyNativeSvg');
+      var storyLivePath = document.getElementById('storyLivePath');
+      var storyLiveMaskPath = document.getElementById('storyLiveMaskPath');
+      var storyLiveHead = document.getElementById('storyLiveHead');
+      var storyRows = document.querySelectorAll('.story-card-native .story-row');
+      var leaf1 = document.getElementById('storyLeaf1');
+      var leaf2 = document.getElementById('storyLeaf2');
+      var leaf3 = document.getElementById('storyLeaf3');
+      var leaf4 = document.getElementById('storyLeaf4');
+
+      if (storyCard && storyLivePath && storyLiveMaskPath) {
+        var pathLength = 0;
+        var storyPlSm = 0, storyPlT = 0, storyPlRaf = 0;
+
+        function getCenter(el, parentRect) {
+          if (!el) return { x: 0, y: 0 };
+          var r = el.getBoundingClientRect();
+          return {
+            x: (r.left + r.width / 2) - parentRect.left,
+            y: (r.top + r.height / 2) - parentRect.top
+          };
+        }
+
+        function updateNativePath() {
+          var cardRect = storyCard.getBoundingClientRect();
+          if (cardRect.width === 0) return;
+
+          var p1 = getCenter(document.getElementById('storyAnchor1'), cardRect);
+          var p2 = getCenter(document.getElementById('storyAnchor2'), cardRect);
+          var p3 = getCenter(document.getElementById('storyAnchor3'), cardRect);
+          var p4 = getCenter(document.getElementById('storyAnchor4'), cardRect);
+          var p5 = getCenter(document.getElementById('storyAnchor5'), cardRect);
+
+          if (p1.y === 0) p1 = { x: cardRect.width * 0.32, y: 75 };
+          if (p2.y === 0) p2 = { x: cardRect.width * 0.78, y: 195 };
+          if (p3.y === 0) p3 = { x: cardRect.width * 0.28, y: 320 };
+          if (p4.y === 0) p4 = { x: cardRect.width * 0.76, y: 440 };
+          if (p5.y === 0) p5 = { x: cardRect.width * 0.50, y: cardRect.height - 25 };
+
+          var w = cardRect.width;
+          var dx1 = p2.x - p1.x;
+          var dy1 = p2.y - p1.y;
+          var dx2 = p2.x - p3.x;
+          var dy2 = p3.y - p2.y;
+          var dx3 = p4.x - p3.x;
+          var dy3 = p4.y - p3.y;
+          var dx4 = p4.x - p5.x;
+          var dy4 = p5.y - p4.y;
+
+          // Segment 1 (Envelope -> Seaside): Swoops gracefully down on the left, then curves into Seaside
+          var c1_1 = { x: p1.x + dx1 * 0.20, y: p1.y + dy1 * 0.55 };
+          var c1_2 = { x: p2.x - dx1 * 0.20, y: p2.y - dy1 * 0.20 };
+
+          // Segment 2 (Seaside -> Couple): Sweeps smoothly down-left high above 'Lost in Conversation', then curves into Couple
+          var c2_1 = { x: p2.x - dx2 * 0.20, y: p2.y + dy2 * 0.55 };
+          var c2_2 = { x: p3.x + dx2 * 0.20, y: p3.y - dy2 * 0.20 };
+
+          // Segment 3 (Couple -> Ring Box): Sweeps down-right through the center corridor, staying completely clear of 'A Simple Yes'
+          var c3_1 = { x: p3.x + dx3 * 0.20, y: p3.y + dy3 * 0.55 };
+          var c3_2 = { x: p4.x - dx3 * 0.20, y: p4.y - dy3 * 0.20 };
+
+          // Segment 4 (Ring Box -> Bottom Trail): Elegant sweeping loop curling down to bottom center
+          var c4_1 = { x: p4.x + w * 0.08, y: p4.y + dy4 * 0.45 };
+          var c4_2 = { x: p5.x + w * 0.14, y: p5.y + dy4 * 0.05 };
+
+          // Exact mathematical midpoints for the leaf sprigs (t = 0.5 on cubic Bezier)
+          function bMid(p0, ca, cb, p3) {
+            return {
+              x: 0.125 * p0.x + 0.375 * ca.x + 0.375 * cb.x + 0.125 * p3.x,
+              y: 0.125 * p0.y + 0.375 * ca.y + 0.375 * cb.y + 0.125 * p3.y
+            };
+          }
+
+          var m1 = bMid(p1, c1_1, c1_2, p2);
+          var m2 = bMid(p2, c2_1, c2_2, p3);
+          var m3 = bMid(p3, c3_1, c3_2, p4);
+
+          if (leaf1) {
+            leaf1.style.left = m1.x.toFixed(1) + 'px';
+            leaf1.style.top = m1.y.toFixed(1) + 'px';
+          }
+          if (leaf2) {
+            leaf2.style.left = m2.x.toFixed(1) + 'px';
+            leaf2.style.top = m2.y.toFixed(1) + 'px';
+          }
+          if (leaf3) {
+            leaf3.style.left = m3.x.toFixed(1) + 'px';
+            leaf3.style.top = m3.y.toFixed(1) + 'px';
+          }
+          if (leaf4) {
+            leaf4.style.left = p5.x.toFixed(1) + 'px';
+            leaf4.style.top = (p5.y - 2).toFixed(1) + 'px';
+          }
+
+          var d = 'M ' + p1.x.toFixed(1) + ' ' + p1.y.toFixed(1) +
+            ' C ' + c1_1.x.toFixed(1) + ' ' + c1_1.y.toFixed(1) + ', ' + c1_2.x.toFixed(1) + ' ' + c1_2.y.toFixed(1) + ', ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1) +
+            ' C ' + c2_1.x.toFixed(1) + ' ' + c2_1.y.toFixed(1) + ', ' + c2_2.x.toFixed(1) + ' ' + c2_2.y.toFixed(1) + ', ' + p3.x.toFixed(1) + ' ' + p3.y.toFixed(1) +
+            ' C ' + c3_1.x.toFixed(1) + ' ' + c3_1.y.toFixed(1) + ', ' + c3_2.x.toFixed(1) + ' ' + c3_2.y.toFixed(1) + ', ' + p4.x.toFixed(1) + ' ' + p4.y.toFixed(1) +
+            ' C ' + c4_1.x.toFixed(1) + ' ' + c4_1.y.toFixed(1) + ', ' + c4_2.x.toFixed(1) + ' ' + c4_2.y.toFixed(1) + ', ' + p5.x.toFixed(1) + ' ' + p5.y.toFixed(1);
+
+          storyLivePath.setAttribute('d', d);
+          storyLiveMaskPath.setAttribute('d', d);
+
+          try {
+            pathLength = storyLiveMaskPath.getTotalLength();
+          } catch (e) {
+            pathLength = 1200;
+          }
+          if (!pathLength || isNaN(pathLength)) pathLength = 1200;
+
+          storyLiveMaskPath.style.strokeDasharray = pathLength + ' ' + pathLength;
+          storyLiveMaskPath.style.strokeDashoffset = (pathLength * (1 - storyPlSm)).toFixed(1);
+        }
+
+        function storyDrawLoop() {
+          storyPlSm += (storyPlT - storyPlSm) * 0.12;
+          if (Math.abs(storyPlT - storyPlSm) < 0.001) storyPlSm = storyPlT;
+
+          if (pathLength > 0) {
+            storyLiveMaskPath.style.strokeDashoffset = (pathLength * (1 - storyPlSm)).toFixed(1);
+
+            if (storyLiveHead && storyLiveMaskPath.getPointAtLength) {
+              if (storyPlSm > 0.015 && storyPlSm < 0.99) {
+                try {
+                  var pt = storyLiveMaskPath.getPointAtLength(pathLength * storyPlSm);
+                  storyLiveHead.setAttribute('cx', pt.x.toFixed(1));
+                  storyLiveHead.setAttribute('cy', pt.y.toFixed(1));
+                  storyLiveHead.style.opacity = '1';
+                } catch (err) { }
+              } else {
+                storyLiveHead.style.opacity = '0';
+              }
+            }
+          }
+
+          if (storyRows.length >= 4) {
+            storyRows[0].classList.toggle('is-reached', storyPlSm >= 0.04);
+            storyRows[1].classList.toggle('is-reached', storyPlSm >= 0.28);
+            storyRows[2].classList.toggle('is-reached', storyPlSm >= 0.52);
+            storyRows[3].classList.toggle('is-reached', storyPlSm >= 0.78);
+          }
+          if (leaf1) leaf1.classList.toggle('is-reached', storyPlSm >= 0.18);
+          if (leaf2) leaf2.classList.toggle('is-reached', storyPlSm >= 0.42);
+          if (leaf3) leaf3.classList.toggle('is-reached', storyPlSm >= 0.68);
+          if (leaf4) leaf4.classList.toggle('is-reached', storyPlSm >= 0.92);
+
+          if (Math.abs(storyPlT - storyPlSm) > 0.001) {
+            storyPlRaf = requestAnimationFrame(storyDrawLoop);
+          } else {
+            storyPlRaf = 0;
+          }
+        }
+
+        function storyNativeTick() {
+          var r = storyCard.getBoundingClientRect();
+          var vh = window.innerHeight || 800;
+          var start = vh * 0.75;
+          var end = vh * 0.20;
+          var raw = (start - r.top) / (r.height + (start - end) * 0.4);
+          storyPlT = Math.max(0, Math.min(1, raw));
+          if (!storyPlRaf) storyPlRaf = requestAnimationFrame(storyDrawLoop);
+        }
+
+        window.addEventListener('scroll', storyNativeTick, { passive: true });
+        window.addEventListener('resize', function () {
+          updateNativePath();
+          storyNativeTick();
+        }, { passive: true });
+
+        document.querySelectorAll('.story-card-native img').forEach(function (img) {
+          if (img.complete) updateNativePath();
+          else img.addEventListener('load', updateNativePath);
+        });
+
+        setTimeout(updateNativePath, 150);
+        setTimeout(updateNativePath, 500);
+        storyNativeTick();
+      }
+
+      /* ===== 6.5 · Forever Begins: Interactive Scratch-to-Reveal Card ===== */
+      (function initScratchCard() {
+        var canvas = document.getElementById('revealCanvas');
+        var box = document.getElementById('revealScratchBox');
+        var sparkles = document.getElementById('revealSparkles');
+        if (!canvas || !box) return;
+
+        var ctx = canvas.getContext('2d');
+        var isDrawing = false;
+        var isRevealed = false;
+        var lastX = 0, lastY = 0;
+        var foilImg = new Image();
+        var checkTimer = null;
+        foilImg.src = 'media/scratch-foil.png';
+
+        function setupCanvas() {
+          if (isRevealed) return;
+          var rect = box.getBoundingClientRect();
+          if (rect.width === 0) return;
+          var dpr = window.devicePixelRatio || 1;
+          var w = rect.width;
+          var h = rect.height;
+          canvas.width = Math.round(w * dpr);
+          canvas.height = Math.round(h * dpr);
+          ctx.scale(dpr, dpr);
+          drawFoil();
+        }
+
+        function drawFoil() {
+          if (isRevealed) return;
+          var rect = box.getBoundingClientRect();
+          ctx.clearRect(0, 0, rect.width, rect.height);
+          if (foilImg.complete && foilImg.naturalWidth > 0) {
+            ctx.drawImage(foilImg, 0, 0, rect.width, rect.height);
+          } else {
+            foilImg.onload = function () {
+              drawFoil();
+            };
+          }
+        }
+
+        foilImg.onload = drawFoil;
+        window.addEventListener('resize', setupCanvas, { passive: true });
+        setTimeout(setupCanvas, 150);
+
+        function getPos(e) {
+          var rect = canvas.getBoundingClientRect();
+          var clientX = e.clientX, clientY = e.clientY;
+          if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+          }
+          return {
+            x: clientX - rect.left,
+            y: clientY - rect.top
+          };
+        }
+
+        function scratch(x, y) {
+          if (isRevealed) return;
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, 26, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (lastX !== 0 || lastY !== 0) {
+            ctx.beginPath();
+            ctx.lineWidth = 52;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+          }
+          lastX = x;
+          lastY = y;
+        }
+
+        function checkProgress() {
+          if (isRevealed || !ctx) return;
+          try {
+            var w = canvas.width;
+            var h = canvas.height;
+            var imgData = ctx.getImageData(0, 0, w, h);
+            var data = imgData.data;
+            var clear = 0;
+            var step = 16;
+            var sampled = 0;
+            for (var i = 3; i < data.length; i += 4 * step) {
+              sampled++;
+              if (data[i] < 40) clear++;
+            }
+            if (sampled > 0 && (clear / sampled) > 0.40) {
+              completeReveal();
+            }
+          } catch (err) { }
+        }
+
+        function completeReveal() {
+          if (isRevealed) return;
+          isRevealed = true;
+          canvas.style.transition = 'opacity 0.8s ease';
+          canvas.style.opacity = '0';
+          setTimeout(function () {
+            canvas.style.display = 'none';
+          }, 850);
+          box.classList.add('is-revealed');
+          launchConfetti();
+        }
+
+        function launchConfetti() {
+          if (!sparkles) return;
+          sparkles.innerHTML = '';
+          for (var i = 0; i < 35; i++) {
+            var s = document.createElement('span');
+            s.className = 'sparkle';
+            s.style.left = (Math.random() * 90 + 5) + '%';
+            s.style.top = (Math.random() * 80 + 10) + '%';
+            s.style.animationDelay = (Math.random() * 0.4) + 's';
+            s.style.setProperty('--tx', ((Math.random() - 0.5) * 80) + 'px');
+            s.style.setProperty('--ty', ((Math.random() - 0.5) * 80) + 'px');
+            sparkles.appendChild(s);
+          }
+        }
+
+        function onStart(e) {
+          if (isRevealed) return;
+          isDrawing = true;
+          var pos = getPos(e);
+          lastX = pos.x;
+          lastY = pos.y;
+          scratch(pos.x, pos.y);
+          if (e.cancelable && e.type.indexOf('touch') !== -1) e.preventDefault();
+        }
+
+        function onMove(e) {
+          if (!isDrawing || isRevealed) return;
+          var pos = getPos(e);
+          scratch(pos.x, pos.y);
+          if (!checkTimer) {
+            checkTimer = setTimeout(function () {
+              checkProgress();
+              checkTimer = null;
+            }, 250);
+          }
+          if (e.cancelable && e.type.indexOf('touch') !== -1) e.preventDefault();
+        }
+
+        function onEnd() {
+          isDrawing = false;
+          lastX = 0;
+          lastY = 0;
+          checkProgress();
+        }
+
+        canvas.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        canvas.addEventListener('touchstart', onStart, { passive: false });
+        window.addEventListener('touchmove', onMove, { passive: false });
+        window.addEventListener('touchend', onEnd, { passive: true });
+        window.addEventListener('touchcancel', onEnd, { passive: true });
+
+        canvas.addEventListener('click', function (e) {
+          if (isRevealed) return;
+          var pos = getPos(e);
+          scratch(pos.x, pos.y);
+          checkProgress();
+        });
+      })();
+
+      /* ===== 7.1 · Blessings & Wishes System ===== */
+      (function initBlessings() {
+        var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzNFoDeb3JnMgP94IyPL2iAvHNYh_ng7oWcc9HORnGYUz1Yd2mO7zIWetlc2z25vwzo/exec';
+        var form = document.getElementById('wishForm');
+        var authorInput = document.getElementById('wishAuthor');
+        var textInput = document.getElementById('wishText');
+        var authorErr = document.getElementById('wishAuthorErr');
+        var textErr = document.getElementById('wishTextErr');
+        var submitBtn = document.getElementById('wishSubmitBtn');
+        var successMsg = document.getElementById('wishSuccessMsg');
+        var list = document.getElementById('wishesList');
+        var loading = document.getElementById('wishesLoading');
+
+        function formatDate(ts) {
+          if (!ts) return 'Recently';
+          try {
+            var d = new Date(ts);
+            if (isNaN(d.getTime())) return '';
+            return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          } catch (e) { return ''; }
+        }
+
+        function escapeHtml(str) {
+          return String(str || '').replace(/[&<>"']/g, function(m) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+          });
+        }
+
+        function createWishCard(item, isNew) {
+          var card = document.createElement('div');
+          card.className = 'wish-card' + (isNew ? ' wish-card--new' : '');
+          card.innerHTML = 
+            '<div class="wish-card__meta">' +
+              '<span class="wish-card__author">' + escapeHtml(item.name) + '</span>' +
+              '<time class="wish-card__time">' + formatDate(item.timestamp) + '</time>' +
+            '</div>' +
+            '<p class="wish-card__text">' + escapeHtml(item.message) + '</p>';
+          return card;
+        }
+
+        function renderWishes(wishes) {
+          if (!list) return;
+          list.innerHTML = '';
+          if (!wishes || wishes.length === 0) {
+            list.innerHTML = '<p class="wishes-wall__empty">Be the first to share your blessing for Sanjo &amp; Dhiya!</p>';
+            return;
+          }
+          // Display newest first
+          for (var i = wishes.length - 1; i >= 0; i--) {
+            if (wishes[i].name && wishes[i].message) {
+              list.appendChild(createWishCard(wishes[i], false));
+            }
+          }
+        }
+
+        function loadWishes() {
+          fetch(SHEET_URL)
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+              if (loading) loading.style.display = 'none';
+              if (data && data.wishes && Array.isArray(data.wishes)) {
+                // Cache wishes locally
+                try { localStorage.setItem('wedding_wishes_cache', JSON.stringify(data.wishes)); } catch (x) {}
+                renderWishes(data.wishes);
+              }
+            })
+            .catch(function(err) {
+              console.warn('Wishes fetch notice:', err);
+              if (loading) loading.style.display = 'none';
+              try {
+                var cached = JSON.parse(localStorage.getItem('wedding_wishes_cache') || '[]');
+                renderWishes(cached);
+              } catch (x) {
+                renderWishes([]);
+              }
+            });
+        }
+
+        if (form) {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name = authorInput.value.trim();
+            var message = textInput.value.trim();
+
+            var hasErr = false;
+            if (!name) { authorErr.hidden = false; hasErr = true; } else { authorErr.hidden = true; }
+            if (!message) { textErr.hidden = false; hasErr = true; } else { textErr.hidden = true; }
+            if (hasErr) return;
+
+            var newWish = {
+              name: name,
+              message: message,
+              timestamp: new Date().toISOString()
+            };
+
+            // Immediate optimistic UI card injection
+            var emptyNotice = list.querySelector('.wishes-wall__empty');
+            if (emptyNotice) emptyNotice.remove();
+            var newCard = createWishCard(newWish, true);
+            list.insertBefore(newCard, list.firstChild);
+
+            // Update local cache
+            try {
+              var cached = JSON.parse(localStorage.getItem('wedding_wishes_cache') || '[]');
+              cached.push(newWish);
+              localStorage.setItem('wedding_wishes_cache', JSON.stringify(cached));
+            } catch (x) {}
+
+            // Button feedback
+            var btnSpan = submitBtn.querySelector('span');
+            submitBtn.disabled = true;
+            if (btnSpan) btnSpan.textContent = 'Sending...';
+            successMsg.hidden = false;
+            authorInput.value = '';
+            textInput.value = '';
+
+            // Send to Google Sheets
+            fetch(SHEET_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({
+                type: 'wish',
+                name: name,
+                message: message
+              })
+            }).then(function() {
+              submitBtn.disabled = false;
+              if (btnSpan) btnSpan.textContent = 'Add Blessing';
+              setTimeout(function() { successMsg.hidden = true; }, 5000);
+            }).catch(function(err) {
+              console.warn('Google Sheet wish sync error:', err);
+              submitBtn.disabled = false;
+              if (btnSpan) btnSpan.textContent = 'Add Blessing';
+            });
+          });
+        }
+
+        loadWishes();
+      })();
+
       /* ===== add to calendar ===== */
       var isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent), gd = function (d) { return d.replace(/[-:]/g, '').slice(0, 15); };
       var gUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(EVENT.title) + '&dates=' + gd(EVENT.start) + '/' + gd(EVENT.end) +
@@ -2276,6 +3722,33 @@
         new FormData(form).forEach(function (v, k) { if (k === 'name' || k === 'come' || !v) return; data[k] = data[k] ? [].concat(data[k], v) : v; });
         /* ДЕМО: ответ сохраняется в браузере. В боевом шаблоне уходит в таблицу ответов пары */
         try { localStorage.setItem('inv-rsvp-24', JSON.stringify(data)); } catch (x) { }
+
+        // Sync RSVP to Google Sheet
+        var attendanceMap = {
+          'yes': 'Yes, with pleasure',
+          'no': 'Sadly, I can’t come',
+          'later': 'I’ll reply a little later'
+        };
+        var rsvpNotes = [];
+        if (data.msg) rsvpNotes.push(data.msg);
+        if (data.plus) rsvpNotes.push('Partner: ' + data.plus);
+        if (data.menu) rsvpNotes.push('Main: ' + (Array.isArray(data.menu) ? data.menu.join(', ') : data.menu));
+        if (data.food) rsvpNotes.push('Dietary: ' + data.food);
+        if (data.drink) rsvpNotes.push('Drinks: ' + (Array.isArray(data.drink) ? data.drink.join(', ') : data.drink));
+        if (data.song) rsvpNotes.push('Song: ' + data.song);
+
+        fetch('https://script.google.com/macros/s/AKfycbzNFoDeb3JnMgP94IyPL2iAvHNYh_ng7oWcc9HORnGYUz1Yd2mO7zIWetlc2z25vwzo/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            type: 'rsvp',
+            name: name,
+            attendance: attendanceMap[come] || come,
+            note: rsvpNotes.join(' | ')
+          })
+        }).catch(function(err) {
+          console.warn('RSVP sheet sync error:', err);
+        });
         box.querySelector('.t').textContent = come === 'yes' ? 'See you there' : come === 'no' ? 'We will miss you' : 'We will wait for you';
         document.getElementById('doneP').textContent = come === 'no' ? 'Thank you for letting us know. We will raise a glass to you.' : 'We will send you a reminder a week before the wedding.';
         var tk = document.getElementById('ticket'), yes = come === 'yes'; tk.hidden = !yes;
