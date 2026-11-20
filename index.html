@@ -294,155 +294,22 @@
       opacity: 0
     }
 
-    /* ===== Intro Redesigned: A little sparkle, a beautiful beginning... ===== */
-    .intro__content {
+    /* ===== Intro Cover: intro.jpg fades away on touch ===== */
+    .intro__cover {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      inset: 0;
       width: 100%;
-      max-width: 440px;
-      padding: 0 24px;
-      box-sizing: border-box;
-      text-align: center;
-      pointer-events: none;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       z-index: 5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity .7s ease, transform .9s var(--ease);
+      transition: opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
     }
 
-    .intro__logo-wrap {
-      position: relative;
-      margin: 0 auto;
-    }
-
-    .intro__logo {
-      display: block;
-      width: clamp(180px, 50vw, 245px);
-      height: auto;
-      filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .9)) drop-shadow(0 0 28px rgba(240, 205, 140, .65)) drop-shadow(0 0 52px rgba(212, 163, 67, .4));
-      animation: introLogoGlow 3.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes introLogoGlow {
-      0% {
-        filter: drop-shadow(0 8px 30px rgba(0, 0, 0, .9)) drop-shadow(0 0 22px rgba(240, 205, 140, .5)) drop-shadow(0 0 40px rgba(212, 163, 67, .3));
-        transform: scale(1);
-      }
-      100% {
-        filter: drop-shadow(0 8px 36px rgba(0, 0, 0, .95)) drop-shadow(0 0 34px rgba(245, 220, 160, .8)) drop-shadow(0 0 62px rgba(220, 170, 80, .55));
-        transform: scale(1.02);
-      }
-    }
-
-    .intro__words {
-      margin-top: 22px;
-      text-align: center;
-    }
-
-    .intro__sparkle {
-      font-family: var(--serif);
-      font-size: clamp(21px, 5.8vw, 26px);
-      line-height: 1.25;
-      font-weight: 400;
-      color: #fff6ee;
-      letter-spacing: 0.02em;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 0 20px rgba(240, 200, 140, 0.35);
-    }
-
-    .intro__beginning {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(23px, 6.2vw, 29px);
-      line-height: 1.35;
-      font-weight: 400;
-      color: #f7e6ce;
-      margin-top: 4px;
-      letter-spacing: 0.01em;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 0 22px rgba(240, 200, 140, 0.4);
-    }
-
-    .intro__divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 140px;
-      margin: 18px auto 20px;
-      color: var(--gold-dark, #caa15a);
-    }
-
-    .intro__divider-line {
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, transparent, rgba(220, 175, 100, 0.75), transparent);
-    }
-
-    .intro__divider-icon {
-      flex-shrink: 0;
-      color: #dfba73;
-      filter: drop-shadow(0 0 6px rgba(223, 186, 115, 0.6));
-    }
-
-    .intro__btn-wrap {
-      margin-top: 4px;
-    }
-
-    .intro__unveil-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 30px;
-      border-radius: 999px;
-      border: 1.5px solid rgba(225, 185, 110, 0.85);
-      background: rgba(30, 2, 7, 0.45);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 0 20px rgba(212, 163, 67, 0.35), inset 0 0 12px rgba(212, 163, 67, 0.15);
-      color: #faebd7;
-      font-family: var(--serif);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      animation: btnGlowPulse 2.8s ease-in-out infinite alternate;
-    }
-
-    @keyframes btnGlowPulse {
-      0% {
-        box-shadow: 0 0 16px rgba(212, 163, 67, 0.25), inset 0 0 10px rgba(212, 163, 67, 0.1);
-        border-color: rgba(220, 175, 100, 0.7);
-      }
-      100% {
-        box-shadow: 0 0 28px rgba(240, 205, 120, 0.6), inset 0 0 18px rgba(240, 205, 120, 0.25);
-        border-color: rgba(248, 220, 155, 0.95);
-      }
-    }
-
-    .intro__tap-wrap {
-      margin-top: 14px;
-    }
-
-    .intro__tap-icon {
-      display: block;
-      width: 28px;
-      height: 34px;
-      margin: 0 auto;
-      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 10px rgba(224, 178, 94, 0.5));
-      animation: tapBounce 1.8s ease-in-out infinite;
-    }
-
-    @keyframes tapBounce {
-      0%, 100% { transform: translateY(0) scale(1); opacity: 0.9; }
-      50% { transform: translateY(-5px) scale(1.06); opacity: 1; }
-    }
-
-    .intro.is-go .intro__content {
+    .intro.is-go .intro__cover {
       opacity: 0;
-      transform: translate(-50%, -55%) scale(.92);
+      transform: scale(1.06);
       pointer-events: none;
     }
 
@@ -923,11 +790,21 @@
 
     @media (max-width:640px) {
       .couple-gallery {
-        gap: 14px
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      .couple-card {
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 175px;
       }
 
       .fam-card {
         grid-template-columns: 1fr;
+        justify-items: center;
         gap: 22px;
         padding: 28px 16px
       }
@@ -1714,9 +1591,19 @@
     }
 
     /* ===== 7 · Blessings & wishes: one letter sheet ===== */
+    #wishes {
+      padding-top: 48px;
+    }
+
+    @media (max-width: 600px) {
+      #wishes {
+        padding-top: 32px;
+      }
+    }
+
     .bless {
       position: relative;
-      margin-top: 40px;
+      margin-top: 0;
       padding: 46px 28px 40px;
       background: var(--paper);
       color: var(--ink);
@@ -2481,45 +2368,18 @@
   <header class="intro" id="intro" role="button" tabindex="0"
     aria-label="A wall of red glitter. Tap to open the invitation from Sanjo and Dhiya" data-block="intro"
     data-block-name="0 · Заставка: блестки">
-    <img class="intro__blur" src="media/film-ruby-first_v=2.jpg" alt="" aria-hidden="true">
+    <img class="intro__blur" src="media/intro.jpg" alt="" aria-hidden="true">
     <div class="intro__box">
-      <video class="intro__v" id="film" poster="media/film-ruby-first_v=2.jpg" muted="" playsinline=""
+      <video class="intro__v" id="film" poster="media/intro.jpg" muted="" playsinline=""
         webkit-playsinline="" preload="auto" disablepictureinpicture=""
         aria-label="Red glitter falls away, the velvet curtain opens and Sanjo and Dhiya dance in a beam of light"></video>
-      <img class="intro__still" src="media/film-ruby-first_v=2.jpg" alt="" aria-hidden="true">
+      <img class="intro__still" src="media/intro.jpg" alt="" aria-hidden="true">
       <canvas class="intro__seq" id="anim" aria-hidden="true"></canvas>
       <img class="intro__last" src="media/film-ruby-last.jpg" alt="" aria-hidden="true">
+      <img class="intro__cover" id="introCover" src="media/intro.jpg" alt="We are getting married - Sanjo &amp; Dhiya - Tap to unveil">
     </div>
     <div class="intro__shade" aria-hidden="true"></div>
     <div class="intro__veil" aria-hidden="true"></div>
-
-    <div class="intro__content">
-      <div class="intro__logo-wrap">
-        <img class="intro__logo" src="media/logo-sd.png" alt="S &amp; D Monogram">
-      </div>
-      <div class="intro__words">
-        <p class="intro__sparkle">A little sparkle,</p>
-        <p class="intro__beginning">a beautiful beginning...</p>
-      </div>
-      <div class="intro__divider" aria-hidden="true">
-        <span class="intro__divider-line"></span>
-        <svg class="intro__divider-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-          <path d="M12 2C12 2 13.5 6.5 16 8C18.5 9.5 22 9.5 22 9.5C22 9.5 18.5 11 16 12.5C13.5 14 12 18 12 18C12 18 10.5 14 8 12.5C5.5 11 2 9.5 2 9.5C2 9.5 5.5 9.5 8 8C10.5 6.5 12 2 12 2Z"/>
-        </svg>
-        <span class="intro__divider-line"></span>
-      </div>
-      <div class="intro__btn-wrap">
-        <div class="intro__unveil-btn">
-          <span>TAP TO UNVEIL</span>
-        </div>
-      </div>
-      <div class="intro__tap-wrap" aria-hidden="true">
-        <svg class="intro__tap-icon" viewBox="0 0 32 38" fill="none" stroke="currentColor">
-          <path d="M16 2v4M9 5l2.5 2.5M23 5l-2.5 2.5" stroke="#fce096" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M16 11v11a2.2 2.2 0 0 0 2.2 2.2h0a2.2 2.2 0 0 0 2.2-2.2v-4a1.8 1.8 0 0 1 3.6 0v4.5c0 5-3.5 8.5-8 8.5s-8-3.5-8-8.5v-3.5a1.8 1.8 0 0 1 3.6 0v1a1.8 1.8 0 0 1 3.6 0v-9a1.8 1.8 0 0 1 3.6 0z" stroke="#e0b25e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="rgba(224, 178, 94, 0.15)"/>
-        </svg>
-      </div>
-    </div>
 
     <div class="hero" aria-live="polite">
       <div class="hero__verse">
@@ -2706,10 +2566,10 @@
       </div>
     </section>
 
-    <!-- 6 · Their Story: Native Live HTML/CSS Card with Animated Scroll Path -->
-    <section class="sec s-story" id="story" data-block="story" data-block-name="6 · Their Story">
+    <!-- 6 · Our Story: Native Live HTML/CSS Card with Animated Scroll Path -->
+    <section class="sec s-story" id="story" data-block="story" data-block-name="6 · Our Story">
       <div class="wrap">
-        <h2 class="t rv">Their Story</h2>
+        <h2 class="t rv">Our Story</h2>
 
         <div class="story-card-native rv" id="storyNativeCard">
           <!-- Dynamic SVG Trail Layer -->
@@ -2846,7 +2706,6 @@
     <!-- 7 · Blessings & wishes: one letter sheet, three passages -->
     <section class="sec s-pearl" id="wishes" data-block="details" data-block-name="7 · Blessings &amp; Wishes">
       <div class="wrap">
-        <h2 class="t rv">Blessings &amp; Wishes</h2>
         <div class="bless rv">
           <article class="bless__item">
             <h3>Your Presence &amp; Prayers</h3>
@@ -2868,10 +2727,10 @@
           <p class="bless__sig">Sanjo &amp; Dhiya</p>
         </div>
 
-        <!-- Add Your Blessing Form Card -->
+        <!-- Blessings & Wishes Form Card -->
         <div class="wish-form-card rv">
           <div class="wish-form-card__head">
-            <h3 class="wish-form-card__title">Add Your Blessing</h3>
+            <h3 class="wish-form-card__title">Blessings &amp; Wishes</h3>
             <p class="wish-form-card__sub">Leave your love, prayers, and heartfelt wishes for Sanjo &amp; Dhiya</p>
           </div>
           <form id="wishForm" class="wish-form" novalidate="">
