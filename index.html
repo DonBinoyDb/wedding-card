@@ -3266,15 +3266,25 @@
         var ctx = canvas.getContext('2d');
         var isDrawing = false;
         var isRevealed = false;
+        var hasScratched = false;
         var lastX = 0, lastY = 0;
+        var lastBoxWidth = 0;
         var foilImg = new Image();
         var checkTimer = null;
+        var initialClearRatio = 0.27; // Baseline transparent perimeter of foil PNG
         foilImg.src = 'media/scratch-foil.png';
 
         function setupCanvas() {
           if (isRevealed) return;
           var rect = box.getBoundingClientRect();
           if (rect.width === 0) return;
+
+          // Avoid resetting or re-drawing the foil on minor mobile view height shifts (address bar toggle)
+          if (hasScratched && lastBoxWidth && Math.abs(rect.width - lastBoxWidth) < 12) {
+            return;
+          }
+          lastBoxWidth = rect.width;
+
           var dpr = window.devicePixelRatio || 1;
           var w = rect.width;
           var h = rect.height;
@@ -3284,12 +3294,32 @@
           drawFoil();
         }
 
+        function calculateInitialClear() {
+          try {
+            var w = canvas.width;
+            var h = canvas.height;
+            var imgData = ctx.getImageData(0, 0, w, h);
+            var data = imgData.data;
+            var clear = 0;
+            var step = 8;
+            var sampled = 0;
+            for (var i = 3; i < data.length; i += 4 * step) {
+              sampled++;
+              if (data[i] < 40) clear++;
+            }
+            if (sampled > 0) {
+              initialClearRatio = clear / sampled;
+            }
+          } catch (err) { }
+        }
+
         function drawFoil() {
           if (isRevealed) return;
           var rect = box.getBoundingClientRect();
           ctx.clearRect(0, 0, rect.width, rect.height);
           if (foilImg.complete && foilImg.naturalWidth > 0) {
             ctx.drawImage(foilImg, 0, 0, rect.width, rect.height);
+            calculateInitialClear();
           } else {
             foilImg.onload = function () {
               drawFoil();
@@ -3316,14 +3346,19 @@
 
         function scratch(x, y) {
           if (isRevealed) return;
+          hasScratched = true;
+          var rect = box.getBoundingClientRect();
+          // Proportional brush radius (18-24px): gives tactile control without clearing the card too quickly
+          var brushRadius = Math.max(18, Math.min(24, Math.round(rect.width * 0.055)));
+
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(x, y, 26, 0, Math.PI * 2);
+          ctx.arc(x, y, brushRadius, 0, Math.PI * 2);
           ctx.fill();
 
           if (lastX !== 0 || lastY !== 0) {
             ctx.beginPath();
-            ctx.lineWidth = 52;
+            ctx.lineWidth = brushRadius * 2;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.moveTo(lastX, lastY);
@@ -3335,21 +3370,27 @@
         }
 
         function checkProgress() {
-          if (isRevealed || !ctx) return;
+          if (isRevealed || !ctx || !hasScratched) return;
           try {
             var w = canvas.width;
             var h = canvas.height;
             var imgData = ctx.getImageData(0, 0, w, h);
             var data = imgData.data;
             var clear = 0;
-            var step = 16;
+            var step = 8;
             var sampled = 0;
             for (var i = 3; i < data.length; i += 4 * step) {
               sampled++;
               if (data[i] < 40) clear++;
             }
-            if (sampled > 0 && (clear / sampled) > 0.40) {
-              completeReveal();
+            if (sampled > 0) {
+              var currentClearRatio = clear / sampled;
+              // Percentage of actual gold foil cleared by the user
+              var foilScratched = (currentClearRatio - initialClearRatio) / Math.max(0.1, 1 - initialClearRatio);
+              // Only reveal automatically when the user has thoroughly scratched the foil (~78% or more)
+              if (foilScratched >= 0.78) {
+                completeReveal();
+              }
             }
           } catch (err) { }
         }
@@ -3399,12 +3440,13 @@
             checkTimer = setTimeout(function () {
               checkProgress();
               checkTimer = null;
-            }, 250);
+            }, 200);
           }
           if (e.cancelable && e.type.indexOf('touch') !== -1) e.preventDefault();
         }
 
         function onEnd() {
+          if (!isDrawing) return;
           isDrawing = false;
           lastX = 0;
           lastY = 0;
@@ -3423,6 +3465,8 @@
         canvas.addEventListener('click', function (e) {
           if (isRevealed) return;
           var pos = getPos(e);
+          lastX = pos.x;
+          lastY = pos.y;
           scratch(pos.x, pos.y);
           checkProgress();
         });
