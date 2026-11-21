@@ -2021,7 +2021,8 @@
       margin-top: 16px
     }
 
-    .rsvp.is-sent form {
+    .rsvp.is-sent form,
+    .rsvp.is-sent .sub {
       display: none
     }
 
@@ -2102,6 +2103,11 @@
     .ticket__grid dd {
       margin: 5px 0 0;
       font: 400 17px/1.3 var(--disp)
+    }
+
+    .ticket__date {
+      letter-spacing: 0.04em;
+      white-space: nowrap;
     }
 
     /* ===== 9 · Вопросы ===== */
@@ -2821,34 +2827,6 @@
                 <input class="in" id="plus" name="plus" placeholder="Partner’s full name" autocomplete="off">
                 <small>Leave empty if you are coming alone</small>
               </div>
-              <fieldset class="f">
-                <legend>Your main course</legend>
-                <div class="choice choice--two">
-                  <label><input type="radio" name="menu" value="Beef"> Beef</label>
-                  <label><input type="radio" name="menu" value="Fish"> Fish</label>
-                  <label><input type="radio" name="menu" value="Vegetarian"> Vegetarian</label>
-                  <label><input type="radio" name="menu" value="Vegan"> Vegan</label>
-                </div>
-              </fieldset>
-              <div class="f">
-                <label for="food">Allergies or dietary needs</label>
-                <input class="in" id="food" name="food" placeholder="For example, no nuts">
-              </div>
-              <fieldset class="f">
-                <legend>What would you like to drink?</legend>
-                <div class="choice choice--two">
-                  <label><input type="checkbox" name="drink" value="Champagne"> Champagne</label>
-                  <label><input type="checkbox" name="drink" value="Red wine"> Red wine</label>
-                  <label><input type="checkbox" name="drink" value="White wine"> White wine</label>
-                  <label><input type="checkbox" name="drink" value="Cocktails"> Cocktails</label>
-                  <label><input type="checkbox" name="drink" value="Spirits"> Spirits</label>
-                  <label><input type="checkbox" name="drink" value="No alcohol"> No alcohol</label>
-                </div>
-              </fieldset>
-              <div class="f">
-                <label for="song">A song that will get you dancing</label>
-                <input class="in" id="song" name="song" placeholder="Artist and song">
-              </div>
             </div>
             <div class="f">
               <label for="msg">A note for the couple</label>
@@ -2865,7 +2843,7 @@
               <dl class="ticket__grid">
                 <div>
                   <dt>Date</dt>
-                  <dd>10.01.2027</dd>
+                  <dd class="ticket__date">10 . 01 . 2027</dd>
                 </div>
                 <div>
                   <dt>Time</dt>
@@ -3697,10 +3675,6 @@
         var rsvpNotes = [];
         if (data.msg) rsvpNotes.push(data.msg);
         if (data.plus) rsvpNotes.push('Partner: ' + data.plus);
-        if (data.menu) rsvpNotes.push('Main: ' + (Array.isArray(data.menu) ? data.menu.join(', ') : data.menu));
-        if (data.food) rsvpNotes.push('Dietary: ' + data.food);
-        if (data.drink) rsvpNotes.push('Drinks: ' + (Array.isArray(data.drink) ? data.drink.join(', ') : data.drink));
-        if (data.song) rsvpNotes.push('Song: ' + data.song);
 
         fetch('https://script.google.com/macros/s/AKfycbzNFoDeb3JnMgP94IyPL2iAvHNYh_ng7oWcc9HORnGYUz1Yd2mO7zIWetlc2z25vwzo/exec', {
           method: 'POST',
