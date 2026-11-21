@@ -2279,77 +2279,96 @@
       position: fixed;
       top: calc(16px + env(safe-area-inset-top));
       right: 16px;
-      z-index: 99;
-      width: 42px;
-      height: 42px;
+      z-index: 999;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      border: 1px solid rgba(217, 180, 124, .55);
-      background: rgba(26, 2, 7, .72);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: var(--gold2);
+      border: 1.5px solid rgba(224, 185, 115, 0.85);
+      background: rgba(30, 2, 7, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fce096;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, .5);
-      transition: opacity .6s ease, transform .2s ease, border-color .3s;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(224, 185, 115, 0.3);
+      transition: opacity .5s ease, transform .2s ease, border-color .3s, box-shadow .3s;
       opacity: 0;
       pointer-events: none;
-      -webkit-tap-highlight-color: transparent
+      -webkit-tap-highlight-color: transparent;
     }
 
     .music-btn.is-visible {
       opacity: 1;
-      pointer-events: auto
+      pointer-events: auto;
     }
 
     .music-btn:hover {
-      border-color: var(--gold);
-      transform: scale(1.06)
+      border-color: #fce096;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7), 0 0 24px rgba(240, 205, 140, 0.55);
+      transform: scale(1.08);
     }
 
     .music-btn:active {
-      transform: scale(.92)
+      transform: scale(.92);
     }
 
     .music-btn__icon {
-      width: 20px;
-      height: 20px;
-      fill: currentColor
+      width: 27px;
+      height: 27px;
+      fill: currentColor;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.75));
     }
 
     .music-btn__icon--mute {
-      display: none
+      display: none;
+    }
+
+    .music-btn.is-playing {
+      border-color: #fce096;
+      box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 20px rgba(240, 205, 140, 0.45);
     }
 
     .music-btn.is-playing .music-btn__icon--play {
       display: block;
-      animation: musicNotePulse 2.4s ease-in-out infinite
+      animation: musicNotePulse 2.4s ease-in-out infinite;
     }
 
     .music-btn.is-playing .music-btn__icon--mute {
-      display: none
+      display: none;
     }
 
     .music-btn:not(.is-playing) .music-btn__icon--play {
-      display: none
+      display: none;
     }
 
     .music-btn:not(.is-playing) .music-btn__icon--mute {
       display: block;
-      opacity: .75
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .music-btn {
+        width: 48px;
+        height: 48px;
+        top: calc(14px + env(safe-area-inset-top));
+        right: 14px;
+      }
+      .music-btn__icon {
+        width: 26px;
+        height: 26px;
+      }
     }
 
     @keyframes musicNotePulse {
-
       0%,
       100% {
-        transform: scale(1)
+        transform: scale(1);
       }
 
       50% {
-        transform: scale(1.14) rotate(4deg)
+        transform: scale(1.14) rotate(4deg);
       }
     }
   </style>
@@ -2362,10 +2381,10 @@
     <source src="media/thousandyears.mpeg" type="audio/mpeg">
   </audio>
   <button class="music-btn" id="musicBtn" type="button" aria-label="Play background music">
-    <svg class="music-btn__icon music-btn__icon--play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+    <svg class="music-btn__icon music-btn__icon--play" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
       <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
     </svg>
-    <svg class="music-btn__icon music-btn__icon--mute" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+    <svg class="music-btn__icon music-btn__icon--mute" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
       <path
         d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4.73 4.73c-.47.18-.97.28-1.49.28-.74 0-1.42-.2-2-.55v2.28c.61.18 1.25.27 1.91.27 2.97 0 5.43-2.16 5.9-5h-2.05c-.41 1.72-1.95 3-3.85 3-.29 0-.57-.04-.84-.11L18.73 20 20 18.73 4.27 3zM14 7h4V3h-6v5.18l2 2V7z" />
     </svg>
