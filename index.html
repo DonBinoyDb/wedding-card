@@ -348,7 +348,7 @@
       font-weight: 400;
       font-size: clamp(14px, 3.8vw, 18px);
       line-height: 1.42;
-      color: #fff4ea;
+      color: var(--gold2);
       text-shadow: 0 2px 14px rgba(10, 0, 4, .95), 0 0 20px rgba(0, 0, 0, .7);
       margin: 0;
     }
@@ -1434,7 +1434,7 @@
       background: #fdf6ee;
       border: 1.5px solid #8a333f;
       border-radius: 28px;
-      padding: 32px 18px 26px;
+      padding: 32px 18px 36px;
       max-width: 480px;
       margin: 0 auto;
       box-shadow: 0 14px 44px rgba(44, 5, 12, 0.12);
@@ -1457,6 +1457,10 @@
       display: flex;
       justify-content: center;
       line-height: 1;
+    }
+
+    .reveal-card__orn-bot {
+      margin: 12px auto 4px;
     }
 
     .reveal-card__orn-top img,
@@ -2353,7 +2357,10 @@
 
 <body>
 
-  <audio id="bgAudio" src="media/thousandyears.mp3" preload="auto" loop playsinline></audio>
+  <audio id="bgAudio" preload="auto" loop playsinline webkit-playsinline src="media/thousandyears.mp3">
+    <source src="media/thousandyears.mp3" type="audio/mpeg">
+    <source src="media/thousandyears.mpeg" type="audio/mpeg">
+  </audio>
   <button class="music-btn" id="musicBtn" type="button" aria-label="Play background music">
     <svg class="music-btn__icon music-btn__icon--play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
       <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
@@ -2638,7 +2645,7 @@
             <div class="story-row story-row--4 story-row--rev" data-step="4">
               <div class="story-col story-col--text">
                 <h3 class="story-title">A Simple Yes</h3>
-                <p class="story-desc">Perhaps love doesn’t always begin with butterflies. Sometimes it begin with simple Yes and grows into something beautiful.</p>
+                <p class="story-desc">Love began with a simple Yes. A heartfelt “yes” that blossoms into a timeless promise that’s growing into our forever.</p>
               </div>
               <div class="story-col story-col--art">
                 <div class="story-art-wrap">
@@ -2916,14 +2923,14 @@
 
       /* ===== 0 · заставка ===== */
       var intro = document.getElementById('intro'), film = document.getElementById('film'), cv = document.getElementById('anim');
-      var opened = false, named = false, vidReady = false, mode = '', autoOK = null, autoT = 0;
+      var opened = false, named = false, vidReady = false, mode = '', autoOK = null;
       var VID = 'media/film-ruby2.mp4';
       film.muted = true; film.defaultMuted = true; film.setAttribute('muted', ''); film.src = VID; try { film.load(); } catch (e) { }
-      film.addEventListener('canplaythrough', function () { if (!vidReady) { vidReady = true; plan(); } });
+      film.addEventListener('canplaythrough', function () { vidReady = true; });
       /* прогрев: сразу запускаем и останавливаем видео без звука */
       try {
-        var wp = film.play(); if (wp && wp.then) wp.then(function () { autoOK = true; if (!opened) { film.pause(); try { film.currentTime = 0; } catch (e) { } } vidReady = true; plan(); },
-          function (e) { if (e && e.name === 'NotAllowedError') { autoOK = false; prepDecode(); vidReady = true; plan(); } });
+        var wp = film.play(); if (wp && wp.then) wp.then(function () { autoOK = true; if (!opened) { film.pause(); try { film.currentTime = 0; } catch (e) { } } vidReady = true; },
+          function (e) { if (e && e.name === 'NotAllowedError') { autoOK = false; prepDecode(); vidReady = true; } });
       } catch (e) { }
 
       /* запасной показ, если телефон блокирует автозапуск: ролик раскодирует декодер */
@@ -2968,37 +2975,50 @@
 
       /* ===== Background Music ===== */
       var bgAudio = document.getElementById('bgAudio'), musicBtn = document.getElementById('musicBtn');
-      var audioStarted = false, fadeTimer = null;
-      function fadeAudioIn(target, ms) {
-        if (!bgAudio) return; clearInterval(fadeTimer); bgAudio.volume = 0;
-        var step = 50, inc = target / (ms / step);
-        fadeTimer = setInterval(function () {
-          if (bgAudio.volume + inc >= target) { bgAudio.volume = target; clearInterval(fadeTimer); }
-          else { bgAudio.volume = Math.min(target, bgAudio.volume + inc); }
-        }, step);
-      }
+      var audioStarted = false;
+
       function startAudio() {
-        if (!bgAudio || audioStarted) return;
-        audioStarted = true;
-        bgAudio.volume = 0;
+        if (!bgAudio) return;
+        if (!bgAudio.paused && bgAudio.currentTime > 0) {
+          audioStarted = true;
+          if (musicBtn) {
+            musicBtn.classList.add('is-visible', 'is-playing');
+            musicBtn.classList.remove('user-paused');
+          }
+          return;
+        }
+        try { bgAudio.volume = 0.85; } catch (e) { }
         var p = bgAudio.play();
         if (p && p.then) {
           p.then(function () {
-            fadeAudioIn(0.75, 1800);
-            if (musicBtn) { musicBtn.classList.add('is-visible', 'is-playing'); musicBtn.setAttribute('aria-label', 'Pause background music'); }
-          }).catch(function () { audioStarted = false; });
+            audioStarted = true;
+            if (musicBtn) {
+              musicBtn.classList.add('is-visible', 'is-playing');
+              musicBtn.classList.remove('user-paused');
+              musicBtn.setAttribute('aria-label', 'Pause background music');
+            }
+          }).catch(function (err) {
+            console.warn('Playback waiting for user gesture:', err);
+            audioStarted = false;
+            if (musicBtn) {
+              musicBtn.classList.add('is-visible');
+              musicBtn.classList.remove('is-playing');
+            }
+          });
         }
       }
+
       function toggleAudio(e) {
         if (e) { e.stopPropagation(); e.preventDefault(); }
         if (!bgAudio) return;
         if (bgAudio.paused) {
+          try { bgAudio.volume = 0.85; } catch (err) { }
           bgAudio.play().then(function () {
-            fadeAudioIn(0.75, 800);
+            audioStarted = true;
             musicBtn.classList.remove('user-paused');
             musicBtn.classList.add('is-playing');
             musicBtn.setAttribute('aria-label', 'Pause background music');
-          }).catch(function () { });
+          }).catch(function (err) { console.warn(err); });
         } else {
           bgAudio.pause();
           musicBtn.classList.add('user-paused');
@@ -3006,7 +3026,9 @@
           musicBtn.setAttribute('aria-label', 'Play background music');
         }
       }
+
       if (musicBtn) { musicBtn.addEventListener('click', toggleAudio); }
+
       document.addEventListener('visibilitychange', function () {
         if (!bgAudio || !audioStarted) return;
         if (document.hidden) {
@@ -3016,9 +3038,10 @@
         }
       });
 
-      /* открыть: нажатие или автозапуск */
+      /* открыть: нажатие пользователя */
       function open() {
-        if (opened) return; opened = true; clearTimeout(autoT); buzz([20, 30, 40]);
+        if (opened) return; opened = true; buzz([20, 30, 40]);
+        if (musicBtn) { musicBtn.classList.add('is-visible'); }
         startAudio();
         intro.classList.add('is-go'); intro.removeAttribute('role'); intro.removeAttribute('tabindex'); intro.setAttribute('aria-label', 'Sanjo and Dhiya');
         if (autoOK === false) { playDecoded(); return; }
@@ -3034,13 +3057,20 @@
       film.addEventListener('timeupdate', function () { if (mode === 'video' && film.currentTime >= EVENT.namesAt) showNames(); });
       film.addEventListener('ended', function () { if (mode === 'video') showNames(); });
       film.addEventListener('error', function () { if (opened && mode === 'video') playDecoded(); });
-      function tapOpen() { if (opened) return; startAudio(); open(); }
-      intro.addEventListener('click', tapOpen); intro.addEventListener('touchend', tapOpen);
-      intro.addEventListener('keydown', function (e) { if (!opened && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); startAudio(); open(); } });
-      window.addEventListener('pointerdown', function () { if (opened && (!audioStarted || (bgAudio && bgAudio.paused && musicBtn && !musicBtn.classList.contains('user-paused')))) { startAudio(); } }, { passive: true });
 
-      function plan() { if (opened || !vidReady) return; clearTimeout(autoT); autoT = setTimeout(open, 3500); }
-      setTimeout(function () { if (!vidReady) { vidReady = true; plan(); } }, 5000);
+      function tapOpen() { if (opened) return; startAudio(); open(); }
+      intro.addEventListener('click', tapOpen);
+      intro.addEventListener('touchend', tapOpen);
+      intro.addEventListener('pointerup', tapOpen);
+      intro.addEventListener('keydown', function (e) { if (!opened && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); startAudio(); open(); } });
+
+      function onUserInteract() {
+        if (opened && (!audioStarted || (bgAudio && bgAudio.paused && musicBtn && !musicBtn.classList.contains('user-paused')))) {
+          startAudio();
+        }
+      }
+      window.addEventListener('click', onUserInteract);
+      window.addEventListener('touchend', onUserInteract, { passive: true });
 
       /* ===== диагностика для проверки на телефоне: ?debug=1 ===== */
       var DBG = { play: '', anim: '', err: '' };
