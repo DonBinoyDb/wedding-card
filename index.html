@@ -397,50 +397,115 @@
       transition-delay: .45s;
     }
 
-    /* Scroll Indicator in Hero Section */
+    /* ===== Glassmorphic Golden Oval Scroll ===== */
     .hero__scroll {
-      display: flex;
-      flex-direction: column;
+      position: absolute;
+      bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translate(-50%, 14px);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      margin: clamp(14px, 3.8vh, 32px) auto 0;
-      color: var(--gold2);
+      gap: 10px;
+      padding: 12px 28px 12px 30px;
+      border-radius: 999px;
+      border: 1.5px solid #fce096;
+      background: rgba(35, 4, 12, 0.45);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+      color: #fffaf0;
+      text-decoration: none;
       opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 1.2s ease, transform 1.2s var(--ease);
-      transition-delay: .7s;
+      pointer-events: none;
+      z-index: 10;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      overflow: hidden;
+      transition: opacity 1.2s ease, transform 1.2s var(--ease), background .3s, border-color .3s, box-shadow .3s;
+    }
+
+    .hero__scroll::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -70%;
+      width: 45%;
+      height: 220%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      transform: rotate(25deg);
+      animation: glaringSweep 3.6s ease-in-out infinite;
       pointer-events: none;
     }
 
     .intro.is-names .hero__scroll {
-      opacity: .92;
-      transform: none;
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
     }
 
     .hero__scroll-text {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .28em;
-      padding-left: .28em;
+      font-family: var(--disp);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .32em;
+      padding-left: .32em;
       text-transform: uppercase;
-      text-shadow: 0 2px 12px rgba(10, 0, 4, .95);
+      color: var(--gold2);
+      text-shadow: 0 2px 10px rgba(10, 0, 4, 0.95);
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+      transition: color .3s ease;
     }
 
-    .hero__scroll-icon {
-      animation: heroScrollBounce 2s ease-in-out infinite;
-      filter: drop-shadow(0 2px 6px rgba(10, 0, 4, .9));
+    .hero__scroll-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold2);
+      filter: drop-shadow(0 2px 6px rgba(10, 0, 4, 0.95));
+      animation: heroArrowBounce 1.8s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+      transition: color .3s ease;
     }
 
-    @keyframes heroScrollBounce {
+    .hero__scroll:hover,
+    .hero__scroll:focus-visible {
+      border-color: #ffffff;
+      background: rgba(50, 6, 16, 0.6);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+      outline: none;
+    }
+
+    .hero__scroll:hover .hero__scroll-text,
+    .hero__scroll:hover .hero__scroll-arrow,
+    .hero__scroll:focus-visible .hero__scroll-text,
+    .hero__scroll:focus-visible .hero__scroll-arrow {
+      color: #ffffff;
+    }
+
+    .hero__scroll:active {
+      transform: translate(-50%, 2px) scale(0.97);
+    }
+
+    @keyframes glaringSweep {
+      0%, 25% {
+        left: -70%;
+      }
+      65%, 100% {
+        left: 150%;
+      }
+    }
+
+    @keyframes heroArrowBounce {
       0%, 100% {
         transform: translateY(0);
-        opacity: .75;
       }
       50% {
-        transform: translateY(6px);
-        opacity: 1;
+        transform: translateY(4px);
       }
     }
 
@@ -2468,13 +2533,17 @@
       <h1 class="hero__names">
         <img class="hero__names-svg" src="media/Sanjo_Dhiya.svg" alt="Sanjo &amp; Dhiya" width="2788" height="1943">
       </h1>
-      <div class="hero__scroll" aria-hidden="true">
-        <span class="hero__scroll-text">Scroll</span>
-        <svg class="hero__scroll-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
     </div>
+
+    <!-- Scroll Indicator at Bottom of Hero Section -->
+    <a href="#letter" class="hero__scroll" id="heroScroll" aria-label="Scroll down to invitation">
+      <span class="hero__scroll-text">Scroll</span>
+      <span class="hero__scroll-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 10l5 5 5-5"/>
+        </svg>
+      </span>
+    </a>
   </header>
 
   <main id="page">
@@ -3097,6 +3166,18 @@
       intro.addEventListener('touchend', tapOpen);
       intro.addEventListener('pointerup', tapOpen);
       intro.addEventListener('keydown', function (e) { if (!opened && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); startAudio(); open(); } });
+
+      var heroScroll = document.getElementById('heroScroll');
+      if (heroScroll) {
+        heroScroll.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var target = document.getElementById('letter') || document.getElementById('page');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
 
       function onUserInteract() {
         if (opened && (!audioStarted || (bgAudio && bgAudio.paused && musicBtn && !musicBtn.classList.contains('user-paused')))) {
