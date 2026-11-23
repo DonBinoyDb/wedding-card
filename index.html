@@ -23,12 +23,10 @@
   <link rel="preload" href="fonts/CormorantGaramond-italic-1.woff2" as="font" type="font/woff2" crossorigin="">
   <link rel="preload" href="fonts/New_Icon_Serif.ttf" as="font" type="font/ttf" crossorigin="">
   <link rel="preload" href="fonts/AnticDidone-normal-400.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="media/intro.jpg" as="image">
   <link rel="preload" href="media/logo-sd.png" as="image">
   <link rel="preload" href="media/Sanjo_Dhiya.svg" as="image" type="image/svg+xml">
-  <link rel="preload" href="media/film-ruby-first_v=2.jpg" as="image">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Corinthia:wght@400;700&display=swap');
-
     @font-face {
       font-family: "Cinzel Decorative";
       src: url("fonts/CinzelDecorative-Regular.ttf") format("truetype");
@@ -397,6 +395,53 @@
       opacity: 1;
       transform: none;
       transition-delay: .45s;
+    }
+
+    /* Scroll Indicator in Hero Section */
+    .hero__scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: clamp(14px, 3.8vh, 32px) auto 0;
+      color: var(--gold2);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 1.2s ease, transform 1.2s var(--ease);
+      transition-delay: .7s;
+      pointer-events: none;
+    }
+
+    .intro.is-names .hero__scroll {
+      opacity: .92;
+      transform: none;
+    }
+
+    .hero__scroll-text {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .28em;
+      padding-left: .28em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 12px rgba(10, 0, 4, .95);
+    }
+
+    .hero__scroll-icon {
+      animation: heroScrollBounce 2s ease-in-out infinite;
+      filter: drop-shadow(0 2px 6px rgba(10, 0, 4, .9));
+    }
+
+    @keyframes heroScrollBounce {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: .75;
+      }
+      50% {
+        transform: translateY(6px);
+        opacity: 1;
+      }
     }
 
     /* ===== секции и плавные стыки ===== */
@@ -1434,7 +1479,7 @@
       background: #fdf6ee;
       border: 1.5px solid #8a333f;
       border-radius: 28px;
-      padding: 32px 18px 36px;
+      padding: 32px 18px 44px;
       max-width: 480px;
       margin: 0 auto;
       box-shadow: 0 14px 44px rgba(44, 5, 12, 0.12);
@@ -1460,7 +1505,7 @@
     }
 
     .reveal-card__orn-bot {
-      margin: 12px auto 4px;
+      margin: 14px auto 10px;
     }
 
     .reveal-card__orn-top img,
@@ -2382,7 +2427,7 @@
 
 <body>
 
-  <audio id="bgAudio" preload="auto" loop playsinline webkit-playsinline src="media/thousandyears.mp3">
+  <audio id="bgAudio" preload="metadata" loop playsinline webkit-playsinline src="media/thousandyears.mp3">
     <source src="media/thousandyears.mp3" type="audio/mpeg">
     <source src="media/thousandyears.mpeg" type="audio/mpeg">
   </audio>
@@ -2404,7 +2449,9 @@
     <div class="intro__box">
       <video class="intro__v" id="film" poster="media/intro.jpg" muted="" playsinline=""
         webkit-playsinline="" preload="auto" disablepictureinpicture=""
-        aria-label="Red glitter falls away, the velvet curtain opens and Sanjo and Dhiya dance in a beam of light"></video>
+        aria-label="Red glitter falls away, the velvet curtain opens and Sanjo and Dhiya dance in a beam of light">
+        <source src="media/film-ruby2.mp4" type="video/mp4">
+      </video>
       <img class="intro__still" src="media/intro.jpg" alt="" aria-hidden="true">
       <canvas class="intro__seq" id="anim" aria-hidden="true"></canvas>
       <img class="intro__last" src="media/film-ruby-last.jpg" alt="" aria-hidden="true">
@@ -2421,6 +2468,12 @@
       <h1 class="hero__names">
         <img class="hero__names-svg" src="media/Sanjo_Dhiya.svg" alt="Sanjo &amp; Dhiya" width="2788" height="1943">
       </h1>
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-text">Scroll</span>
+        <svg class="hero__scroll-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
   </header>
 
@@ -2920,54 +2973,28 @@
 
       /* ===== 0 · заставка ===== */
       var intro = document.getElementById('intro'), film = document.getElementById('film'), cv = document.getElementById('anim');
-      var opened = false, named = false, vidReady = false, mode = '', autoOK = null;
+      var opened = false, named = false, vidReady = false, mode = '';
       var VID = 'media/film-ruby2.mp4';
-      film.muted = true; film.defaultMuted = true; film.setAttribute('muted', ''); film.src = VID; try { film.load(); } catch (e) { }
-      film.addEventListener('canplaythrough', function () { vidReady = true; });
-      /* прогрев: сразу запускаем и останавливаем видео без звука */
-      try {
-        var wp = film.play(); if (wp && wp.then) wp.then(function () { autoOK = true; if (!opened) { film.pause(); try { film.currentTime = 0; } catch (e) { } } vidReady = true; },
-          function (e) { if (e && e.name === 'NotAllowedError') { autoOK = false; prepDecode(); vidReady = true; } });
-      } catch (e) { }
-
-      /* запасной показ, если телефон блокирует автозапуск: ролик раскодирует декодер */
-      var DEC = null;
-      function prepDecode() {
-        if (DEC || !window.VideoDecoder || !window.fetch) return DEC;
-        DEC = Promise.all([fetch(VID).then(function (r) { return r.arrayBuffer(); }), fetch('media/film-ruby2.json').then(function (r) { return r.json(); })])
-          .then(function (x) {
-            var m = x[1], d = atob(m.desc), desc = new Uint8Array(d.length); for (var i = 0; i < d.length; i++)desc[i] = d.charCodeAt(i);
-            var cfg = { codec: m.codec, codedWidth: m.w, codedHeight: m.h, description: desc };
-            return VideoDecoder.isConfigSupported(cfg).then(function (r) { if (!r.supported) throw 0; return { buf: new Uint8Array(x[0]), m: m, cfg: cfg }; });
-          });
-        DEC.catch(function () { }); return DEC;
-      }
-      function playDecoded() {
-        if (mode === 'dec' || named) return; mode = 'dec'; try { film.pause(); } catch (e) { } DBG.play += ' >dec';
-        var p = prepDecode(); if (!p) { stillEnd(); return; }
-        p.then(function (D) {
-          if (named) return;
-          var r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1), W = cv.width = Math.round(r.width * dpr), Hc = cv.height = Math.round(r.height * dpr), g = cv.getContext('2d');
-          var sc = Math.max(W / D.m.w, Hc / D.m.h), dw = D.m.w * sc, dh = D.m.h * sc, dx = (W - dw) / 2, dy = (Hc - dh) / 2;
-          var F = D.m.f, q = [], i = 0, t0 = 0, last = F[F.length - 1][2], done = false;
-          var dec = new VideoDecoder({ output: function (fr) { q.push(fr); }, error: function () { if (!done) { done = true; stillEnd(); } } });
-          dec.configure(D.cfg);
-          function feed() { while (i < F.length && q.length + dec.decodeQueueSize < 12) { var f = F[i++]; dec.decode(new EncodedVideoChunk({ type: f[3] ? 'key' : 'delta', timestamp: f[2], data: D.buf.subarray(f[0], f[0] + f[1]) })); } if (i >= F.length) dec.flush().catch(function () { }); }
-          feed();
-          (function step(now) {
-            if (done) return;
-            if (!t0 && q.length) { t0 = now; intro.classList.add('is-seq', 'is-playing'); DBG.anim = 'decoding'; }
-            if (t0) {
-              var t = (now - t0) * 1000, fr = null;
-              while (q.length && q[0].timestamp <= t) { if (fr) fr.close(); fr = q.shift(); }
-              if (fr) { g.drawImage(fr, dx, dy, dw, dh); fr.close(); }
-              if (t >= EVENT.namesAt * 1e6) showNames();
-              if (t > last + 40000 && i >= F.length && !q.length) { done = true; intro.classList.add('is-still'); showNames(); try { dec.close(); } catch (e) { } return; }
-            }
-            feed(); requestAnimationFrame(step);
-          })(performance.now());
-        }, function () { stillEnd(); });
-        setTimeout(function () { if (!named && !intro.classList.contains('is-seq')) stillEnd(); }, 9000);
+      if (film) {
+        film.muted = true; film.defaultMuted = true; film.setAttribute('muted', '');
+        film.setAttribute('playsinline', ''); film.setAttribute('webkit-playsinline', '');
+        if (!film.src || !film.src.includes('film-ruby2.mp4')) {
+          film.src = VID;
+        }
+        try { film.load(); } catch (e) { }
+        film.addEventListener('canplaythrough', function () { vidReady = true; });
+        try {
+          var wp = film.play();
+          if (wp && wp.then) {
+            wp.then(function () {
+              if (!opened) {
+                film.pause();
+                try { film.currentTime = 0; } catch (e) { }
+              }
+              vidReady = true;
+            }).catch(function () { vidReady = true; });
+          }
+        } catch (e) { }
       }
 
       /* ===== Background Music ===== */
@@ -3041,19 +3068,29 @@
         if (musicBtn) { musicBtn.classList.add('is-visible'); }
         startAudio();
         intro.classList.add('is-go'); intro.removeAttribute('role'); intro.removeAttribute('tabindex'); intro.setAttribute('aria-label', 'Sanjo and Dhiya');
-        if (autoOK === false) { playDecoded(); return; }
-        mode = 'video'; try { film.currentTime = 0; } catch (e) { }
-        var fail = function (e) { DBG.play = 'rejected ' + (e && e.name); stillEnd(); };
-        try { var p = film.play(); if (p && p.then) p.then(function () { DBG.play = 'ok'; }, fail); } catch (e) { fail(e); }
-        setTimeout(function () { if (mode === 'video' && !named && film.currentTime < .05) playDecoded(); }, 4000);
-        setTimeout(function () { if (mode === 'video' && !named && film.currentTime < .3) stillEnd(); }, 10000);
+        mode = 'video';
+        if (film) {
+          try { film.currentTime = 0; } catch (e) { }
+          var fail = function (e) { DBG.play = 'rejected ' + (e && e.name); stillEnd(); };
+          try {
+            var p = film.play();
+            if (p && p.then) p.then(function () { DBG.play = 'ok'; }, fail);
+          } catch (e) { fail(e); }
+          setTimeout(function () { if (mode === 'video' && !named && film.currentTime < .05) stillEnd(); }, 4000);
+          setTimeout(function () { if (mode === 'video' && !named && film.currentTime < .3) stillEnd(); }, 10000);
+        } else {
+          showNames();
+        }
       }
-      function stillEnd() { if (named) return; try { film.pause(); } catch (e) { } intro.classList.add('is-still', 'is-playing'); showNames(); }
+      function stillEnd() { if (named) return; try { if (film) film.pause(); } catch (e) { } intro.classList.add('is-still', 'is-playing'); showNames(); }
       function showNames() { if (named) return; named = true; intro.classList.add('is-names'); H.classList.remove('is-intro'); dockSync(); }
-      film.addEventListener('playing', function () { if (mode === 'video') intro.classList.add('is-playing'); });
-      film.addEventListener('timeupdate', function () { if (mode === 'video' && film.currentTime >= EVENT.namesAt) showNames(); });
-      film.addEventListener('ended', function () { if (mode === 'video') showNames(); });
-      film.addEventListener('error', function () { if (opened && mode === 'video') playDecoded(); });
+
+      if (film) {
+        film.addEventListener('playing', function () { if (mode === 'video') intro.classList.add('is-playing'); });
+        film.addEventListener('timeupdate', function () { if (mode === 'video' && film.currentTime >= EVENT.namesAt) showNames(); });
+        film.addEventListener('ended', function () { if (mode === 'video') stillEnd(); });
+        film.addEventListener('error', function () { if (opened && mode === 'video') stillEnd(); });
+      }
 
       function tapOpen() { if (opened) return; startAudio(); open(); }
       intro.addEventListener('click', tapOpen);
